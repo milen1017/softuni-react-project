@@ -1,7 +1,14 @@
-const Home = () => {
-    return(
-       <h1>Home</h1>
-    )
-}
+import Entry from "./Entry";
 
-export default Home
+const Home = () => {
+	return (
+		<div>
+			<h1>Home</h1>
+			<Entry />
+            <Entry />
+            <Entry />
+		</div>
+	);
+};
+
+export default Home;
