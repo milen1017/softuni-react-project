@@ -1,35 +1,64 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const Register = () => {
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [passwordsMatch, setPasswordsMatch] = useState(true);
+
 	async function register(ev) {
 		ev.preventDefault();
-		const response = await fetch('http://localhost:3000/register', {
-		  method: 'POST',
-		  body: JSON.stringify({username,password}),
-		  headers: {'Content-Type':'application/json'},
-		});
-		if (response.status === 200) {
-		  alert('registration successful');
-		} else {
-		  alert('registration failed');
+
+		if (password !== confirmPassword) {
+			setPasswordsMatch(false);
+			return;
 		}
-	  }
+
+		const response = await fetch("http://localhost:3000/register", {
+			method: "POST",
+			body: JSON.stringify({ username, password }),
+			headers: { "Content-Type": "application/json" },
+		});
+
+		if (response.status === 200) {
+			alert("Registration successful");
+		} else {
+			alert("Registration failed");
+		}
+	}
 
 	return (
 		<form className="register" onSubmit={register}>
-		<h1>Register</h1>
-		<input type="text"
-			   placeholder="username"
-			   value={username}
-			   onChange={ev => setUsername(ev.target.value)}/>
-		<input type="password"
-			   placeholder="password"
-			   value={password}
-			   onChange={ev => setPassword(ev.target.value)}/>
-		<button>Register</button>
-	  </form>
+			<h1>Register</h1>
+			<input
+				type="text"
+				placeholder="username"
+				value={username}
+				onChange={(ev) => setUsername(ev.target.value)}
+			/>
+			<input
+				type="password"
+				placeholder="password"
+				value={password}
+				onChange={(ev) => setPassword(ev.target.value)}
+			/>
+			<input
+				type="password"
+				placeholder="confirm password"
+				value={confirmPassword}
+				onChange={(ev) => {
+					setConfirmPassword(ev.target.value);
+					if (passwordsMatch === false) {
+						setPasswordsMatch(true);
+					}
+				}}
+				style={{ border: passwordsMatch ? "1px solid #ccc" : "1px solid red" }}
+			/>
+			{!passwordsMatch && (
+				<p style={{ color: "red" }}>Passwords do not match</p>
+			)}
+			<button>Register</button>
+		</form>
 	);
 };
 
