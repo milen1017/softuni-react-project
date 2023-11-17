@@ -5,15 +5,16 @@ const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const cookieParser = require("cookie-parser");
 const app = express();
 require("dotenv").config();
 
 const { DB_CONNECTION, PORT } = process.env;
 const secretKey = crypto.randomBytes(32).toString("base64");
 
-
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cookieParser());
 
 mongoose
 	.connect(`${DB_CONNECTION}`)
@@ -23,7 +24,6 @@ mongoose
 	.catch((error) => {
 		console.error("Error connecting to database:", error);
 	});
-
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
@@ -69,6 +69,22 @@ app.post("/login", async (req, res) => {
 		res.status(400).json(e.message || "An error occurred during login");
 	}
 });
+
+app.get("/profile", (req, res) => {
+	const { token } = req.cookies;
+	jwt.verify(token, secretKey, (err, decoded) => {
+		if (err) {
+		  console.error('Token verification failed:', err.message);
+		} else {
+		//   console.log('Token verified. Decoded payload:', decoded);
+		  res.json(decoded)
+		}
+	  })
+});
+
+app.post('/logout', (req,res) => {
+	res.cookie('token', '').json('ok');
+  });
 
 app.listen(PORT, () => {
 	console.log(`Server is running at port ${PORT}`);
