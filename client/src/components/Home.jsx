@@ -2,7 +2,7 @@ import Entry from "./Entry";
 
 const Home = () => {
 	return (
-		<div>
+		<div className="logo">
 			<h1>Home</h1>
 			<Entry />
             <Entry />

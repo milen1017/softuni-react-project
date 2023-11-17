@@ -10,22 +10,20 @@ main {
 	max-width: 600px;
 	margin: 0 auto;
 }
-header {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 50px;
-}
 
 header a {
 	text-decoration: none;
 	color: inherit;
 }
 
-header a.logo {
-	font-weight: bold;
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px; /* Adjust margin as needed */
 }
 
-header nav {
+nav .auth-links {
 	display: flex;
 	gap: 15px;
 }
@@ -44,22 +42,26 @@ form.register {
 	max-width: 400px;
 	margin: 0 auto;
 }
-input{
-  display: block;
-  margin-bottom: 5px;
-  width: 100%;
-  padding: 5px 7px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
+input {
+	display: block;
+	margin-bottom: 5px;
+	width: 100%;
+	padding: 5px 7px;
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	background-color: #fff;
 }
-button{
-  cursor: pointer;
-  width: 100%;
-  display: block;
-  background-color: #555;
-  border:0;
-  color: #fff;
-  border-radius: 5px;
-  padding: 7px 0;
+button {
+	cursor: pointer;
+	width: 100%;
+	display: block;
+	background-color: #555;
+	border: 0;
+	color: #fff;
+	border-radius: 5px;
+	padding: 7px 0;
+}
+
+footer {
+	display: flex;
 }
