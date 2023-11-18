@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BASE_URL from "../config"
 
 const Register = () => {
 	const [username, setUsername] = useState("");
@@ -14,7 +15,7 @@ const Register = () => {
 			return;
 		}
 
-		const response = await fetch("http://localhost:3000/register", {
+		const response = await fetch(`${BASE_URL}/register`, {
 			method: "POST",
 			body: JSON.stringify({ username, password }),
 			headers: { "Content-Type": "application/json" },
