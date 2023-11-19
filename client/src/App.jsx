@@ -5,6 +5,7 @@ import { UserContextProvider } from "./UserContext";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import CreateEntry from "./components/CreateEntry";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 					<Route index element={<Home />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
+					<Route path="/create" element={<CreateEntry />} />
 				</Route>
 			</Routes>
 		</UserContextProvider>
