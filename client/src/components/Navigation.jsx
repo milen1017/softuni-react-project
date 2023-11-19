@@ -1,6 +1,7 @@
 import { useEffect, useState ,useContext} from "react";
 import { Link, NavLink } from "react-router-dom";
 import {UserContext} from "../UserContext";
+import BASE_URL from "../config"
 
 
 const Navigation = () => {
@@ -8,7 +9,7 @@ const Navigation = () => {
 	const {setUserInfo,userInfo} = useContext(UserContext);
 
 	useEffect(() => {
-		fetch("http://localhost:3000/profile", { credentials: "include" })
+		fetch(`${BASE_URL}/profile`, { credentials: "include" })
 			.then((response) => response.json())
 			.then((userInfo) => {
 				setUserInfo(userInfo);
@@ -20,7 +21,7 @@ const Navigation = () => {
 	}, []);
 
 	function logout() {
-		fetch("http://localhost:3000/logout", {
+		fetch(`${BASE_URL}/logout`, {
 			credentials: "include",
 			method: "POST",
 		});
