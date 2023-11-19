@@ -2,10 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 const User = require("./models/User");
+const Entry = require("./models/Entry");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
+const { log } = require("console");
 const app = express();
 require("dotenv").config();
 
@@ -74,17 +76,50 @@ app.get("/profile", (req, res) => {
 	const { token } = req.cookies;
 	jwt.verify(token, secretKey, (err, decoded) => {
 		if (err) {
-		  console.error('Token verification failed:', err.message);
+			console.error("Token verification failed:", err.message);
 		} else {
-		//   console.log('Token verified. Decoded payload:', decoded);
-		  res.json(decoded)
+			//   console.log('Token verified. Decoded payload:', decoded);
+			res.json(decoded);
 		}
-	  })
+	});
 });
 
-app.post('/logout', (req,res) => {
-	res.cookie('token', '').json('ok');
-  });
+app.post("/posts", async (req, res) => {
+	//todo optimise getting author from cookie
+	try {
+		const { title, summary, content, cover, tags, likes } = req.body;
+		const { token } = req.cookies;
+		jwt.verify(token, secretKey, async (err, decoded) => {
+			if (err) {
+				console.error("Token verification failed:", err.message);
+			} else {
+				console.log("Token verified. Decoded payload:", decoded);
+				
+				const newEntry = new Entry({
+					title,
+					summary,
+					content,
+					cover,
+					tags,
+					likes,
+					 author: decoded.id,
+				});
+
+				
+				const savedEntry = await newEntry.save();
+
+				res.status(201).json(savedEntry); 
+			}
+		});
+	} catch (error) {
+		console.error("Error creating entry:", error);
+		res.status(500).json({ error: "Failed to create entry" }); // todo handle error response
+	}
+});
+
+app.post("/logout", (req, res) => {
+	res.cookie("token", "").json("ok");
+});
 
 app.listen(PORT, () => {
 	console.log(`Server is running at port ${PORT}`);
