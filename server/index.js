@@ -94,7 +94,7 @@ app.post("/posts", async (req, res) => {
 				console.error("Token verification failed:", err.message);
 			} else {
 				console.log("Token verified. Decoded payload:", decoded);
-				
+
 				const newEntry = new Entry({
 					title,
 					summary,
@@ -102,19 +102,23 @@ app.post("/posts", async (req, res) => {
 					cover,
 					tags,
 					likes,
-					 author: decoded.id,
+					author: decoded.id,
 				});
 
-				
 				const savedEntry = await newEntry.save();
 
-				res.status(201).json(savedEntry); 
+				res.status(201).json(savedEntry);
 			}
 		});
 	} catch (error) {
 		console.error("Error creating entry:", error);
 		res.status(500).json({ error: "Failed to create entry" }); // todo handle error response
 	}
+});
+
+app.get("/posts", async (req, res) => {
+
+	res.json(await Entry.find());
 });
 
 app.post("/logout", (req, res) => {
