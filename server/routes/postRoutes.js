@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+
 const Entry = require('../models/Entry');
 
-const secretKey = crypto.randomBytes(32).toString('base64');
+const { secretKey } = require("../config");
 
 router.post('/', async (req, res) => {
   try {

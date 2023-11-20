@@ -3,9 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const crypto = require('crypto');
-
-const secretKey = crypto.randomBytes(32).toString('base64');
+const { secretKey } = require("../config");
 
 router.post('/register', async (req, res) => {
   //todo create session redirect ro home 
@@ -65,6 +63,7 @@ router.get('/profile', (req, res) => {
 
 router.post('/logout', (req, res) => {
   res.cookie('token', '').json('ok');
+   //todo redirect ro home 
 });
 
 module.exports = router;
