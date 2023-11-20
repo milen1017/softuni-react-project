@@ -8,19 +8,19 @@ const Navigation = () => {
 	const { setUserInfo, userInfo } = useContext(UserContext);
 
 	useEffect(() => {
-		fetch(`${BASE_URL}/profile`, { credentials: "include" })
+		fetch(`${BASE_URL}/auth/profile`, { credentials: "include" })
 			.then((response) => response.json())
 			.then((userInfo) => {
 				setUserInfo(userInfo);
 			})
 			.catch((error) => {
-				// todo handle fetch errors here
+				// todo handle fetch errors here(fix not valid JSON)
 				console.error("Error fetching data:", error);
 			});
 	}, []);
 
 	function logout() {
-		fetch(`${BASE_URL}/logout`, {
+		fetch(`${BASE_URL}/auth/logout`, {
 			credentials: "include",
 			method: "POST",
 		});
