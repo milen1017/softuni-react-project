@@ -1,6 +1,7 @@
 import "./Entry.css";
 
-const Entry = ({ title, summary, tags, cover }) => {
+const Entry = ({ title, summary, tags, cover, author, createdAt }) => {
+	const formattedDate = new Date(createdAt).toLocaleString();
 	return (
 		<div className="projcard projcard-blue">
 			<div className="projcard-innerbox">
@@ -8,12 +9,11 @@ const Entry = ({ title, summary, tags, cover }) => {
 				<div className="projcard-textbox">
 					<div className="projcard-title">{title}</div>
 					<div className="projcard-subtitle">
-						This explains the card in more detail
+						Posted by {author.username} at {formattedDate}
 					</div>
 					<div className="projcard-bar" />
 					<div className="projcard-description">{summary}</div>
 					<div className="projcard-tagbox">
-						{/* Map through tags array and render span for each tag */}
 						{tags.map((tag, index) => (
 							<span key={index} className="projcard-tag">
 								{tag}

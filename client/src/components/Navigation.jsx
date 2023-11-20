@@ -1,12 +1,11 @@
-import { useEffect, useState ,useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import {UserContext} from "../UserContext";
-import BASE_URL from "../config"
-
+import { UserContext } from "../UserContext";
+import BASE_URL from "../config";
 
 const Navigation = () => {
 	// const [username, setUsername] = useState(null);
-	const {setUserInfo,userInfo} = useContext(UserContext);
+	const { setUserInfo, userInfo } = useContext(UserContext);
 
 	useEffect(() => {
 		fetch(`${BASE_URL}/profile`, { credentials: "include" })
@@ -28,7 +27,7 @@ const Navigation = () => {
 		setUserInfo(null);
 	}
 
-	const username = userInfo?.username
+	const username = userInfo?.username;
 
 	return (
 		<nav className="logo">

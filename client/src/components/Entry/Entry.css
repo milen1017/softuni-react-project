@@ -55,6 +55,7 @@
 	top: 0;
 	left: 0;
 	transition: transform 0.2s ease;
+	object-fit: cover;
 }
 .projcard:nth-child(2n) .projcard-img {
 	left: initial;
@@ -175,3 +176,11 @@
 	right: -10px;
 	top: 0;
 }
+
+/* Color Theme Swatches in Hex */
+.Palette-Martini-Racing-1-hex { color: #CDD4DA; }
+.Palette-Martini-Racing-2-hex { color: #EBEEF3; }
+.Palette-Martini-Racing-3-hex { color: #B8E4F1; }
+.Palette-Martini-Racing-4-hex { color: #060E2E; }
+.Palette-Martini-Racing-5-hex { color: #FF1A03; }
+

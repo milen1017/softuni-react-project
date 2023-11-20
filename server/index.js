@@ -93,7 +93,7 @@ app.post("/posts", async (req, res) => {
 			if (err) {
 				console.error("Token verification failed:", err.message);
 			} else {
-				console.log("Token verified. Decoded payload:", decoded);
+				// console.log("Token verified. Decoded payload:", decoded);
 
 				const newEntry = new Entry({
 					title,
@@ -118,7 +118,7 @@ app.post("/posts", async (req, res) => {
 
 app.get("/posts", async (req, res) => {
 
-	res.json(await Entry.find());
+	res.json(await Entry.find().populate('author',['username']));
 });
 
 app.post("/logout", (req, res) => {
