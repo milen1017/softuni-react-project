@@ -1,0 +1,16 @@
+
+
+.button-container {
+	display: flex;
+	gap: 10px; 
+    text-decoration: none;
+}
+
+.button-container button {
+
+	width: 150px;
+	text-decoration: none;
+}
+
+
+

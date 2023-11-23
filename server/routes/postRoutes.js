@@ -36,6 +36,46 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    const { title, summary, content, cover, tags, likes } = req.body;
+    const { token } = req.cookies;
+    const postId = req.params.id; // Extract the post ID from the URL parameter
+
+    jwt.verify(token, secretKey, async (err, decoded) => {
+      if (err) {
+        console.error("Token verification failed:", err.message);
+        res.status(401).json({ error: 'Unauthorized' });
+      } else {
+        // Find the entry by ID and update its fields
+        const updatedEntry = await Entry.findByIdAndUpdate(
+          postId,
+          {
+            title,
+            summary,
+            content,
+            cover,
+            tags,
+            likes,
+            author: decoded.id,
+          },
+          { new: true } // Return the updated entry
+        );
+
+        if (!updatedEntry) {
+          return res.status(404).json({ error: 'Entry not found' });
+        }
+
+        res.status(200).json(updatedEntry);
+      }
+    });
+  } catch (error) {
+    console.error("Error updating entry:", error);
+    res.status(500).json({ error: "Failed to update entry" });
+  }
+});
+
+
 router.get('/', async (req, res) => {
   try {
     const entries = await Entry.find().populate('author', ['username']);
