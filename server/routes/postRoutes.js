@@ -46,4 +46,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  const {id} = req.params;
+  const postDoc = await Entry.findById(id).populate('author', ['username']);
+  res.json(postDoc);
+})
+
 module.exports = router;
