@@ -12,7 +12,7 @@ const Login = () => {
 
   async function onLogin(e) {
     e.preventDefault();
-    const response = await fetch(`${BASE_URL}/login`, {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
