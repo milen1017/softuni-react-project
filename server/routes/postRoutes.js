@@ -6,6 +6,8 @@ const Entry = require('../models/Entry');
 
 const { secretKey } = require("../config");
 
+//todo add guards
+
 router.post('/', async (req, res) => {
   try {
     const { title, summary, content, cover, tags, likes } = req.body;
@@ -74,7 +76,22 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: "Failed to update entry" });
   }
 });
+router.delete('/:id', async (req, res) => {
+  const postId = req.params.id;
 
+  try {
+    const deletedPost = await Entry.findByIdAndDelete(postId);
+
+    if (!deletedPost) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    res.status(500).json({ error: 'Failed to delete post' });
+  }
+});
 
 router.get('/', async (req, res) => {
   try {

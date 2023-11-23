@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import BASE_URL from "../../config";
 import "./EntryPage.css";
 
 export default function EntryPage() {
+	const navigate = useNavigate();
 	const { id } = useParams();
 	const [postInfo, setPostInfo] = useState([]);
 	const { userInfo } = useContext(UserContext);
@@ -22,7 +23,6 @@ export default function EntryPage() {
 				// console.log(postInfo.author?._id);
 			} catch (error) {
 				console.error("Error fetching post:", error);
-				// Handle error scenarios
 			}
 		};
 
@@ -37,6 +37,24 @@ export default function EntryPage() {
 		}
 	}, [postInfo, userInfo.id]);
 
+	const handleDelete = async () => {
+		try {
+			const response = await fetch(`${BASE_URL}/posts/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error("Failed to delete post");
+			}
+			navigate("/");
+		} catch (error) {
+			console.error("Error deleting post:", error);
+		}
+	};
+
 	return (
 		<>
 			<h1>{postInfo.title}</h1>
@@ -47,14 +65,13 @@ export default function EntryPage() {
 			<p>Posted by {postInfo.author?.username}</p>
 			<p>Created At: {postInfo.createdAt}</p>
 
-			{canEditOrDelete && ( // Conditionally render buttons based on the condition
+			{canEditOrDelete && (
 				<div className="button-container">
 					<Link to={`/edit/${id}`}>
 						<button>Edit</button>
 					</Link>
-					<Link to={`/delete/${id}`}>
-						<button>Delete</button>
-					</Link>
+
+					<button onClick={handleDelete}>Delete</button>
 				</div>
 			)}
 		</>
