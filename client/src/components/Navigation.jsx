@@ -36,6 +36,7 @@ const Navigation = () => {
 				{username && (
 					<>
 						<Link to="/create">Create post</Link>
+						<Link to="/catalog">Catalog</Link>
 						<a onClick={logout}>Logout</a>
 					</>
 				)}

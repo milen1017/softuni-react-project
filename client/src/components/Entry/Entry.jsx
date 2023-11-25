@@ -1,30 +1,50 @@
 import "./Entry.css";
 import { Link } from "react-router-dom";
 
+
 const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {
-	const formattedDate = new Date(createdAt).toLocaleString();
+	// todo fix date
 	return (
-		<div className="projcard projcard-blue">
-			<Link to={`/post/${_id}`}>
-				<div className="projcard-innerbox">
-					<img className="projcard-img" src={cover} />
-					<div className="projcard-textbox">
-						<div className="projcard-title">{title}</div>
-						<div className="projcard-subtitle">
-							Posted by {author.username} at {formattedDate}
+		<div className="container mt-5">
+			<div className="row">
+				<div className="col-12">
+					<article className="blog-card">
+						<div className="blog-card__background">
+							<div className="card__background--wrapper">
+								<div
+									className="card__background--main"
+									style={{
+										backgroundImage: `url(${cover})`,
+									}}
+								>
+									<div className="card__background--layer"></div>
+								</div>
+							</div>
 						</div>
-						<div className="projcard-bar" />
-						<div className="projcard-description">{summary}</div>
-						<div className="projcard-tagbox">
-							{tags.map((tag, index) => (
-								<span key={index} className="projcard-tag">
-									{tag}
+						<div className="blog-card__head">
+							<span className="date__box">
+								<span className="date__day">11</span>
+								<span className="date__month">JAN</span>
+							</span>
+						</div>
+						<div className="blog-card__info">
+							<h2>{title}</h2>
+							<p>
+								<span className="icon-link mr-3">
+									<i className="fa fa-pencil-square-o"></i>post by {author.username}
 								</span>
-							))}
+								<span className="icon-link">
+									<i className="fa fa-comments-o"></i> 150
+								</span>
+							</p>
+							<p>{summary}</p>
+							<Link to={`/post/${_id}`} className="btn btn--with-icon">
+								<i className="btn-icon fa fa-long-arrow-right"></i>READ MORE
+							</Link>
 						</div>
-					</div>
+					</article>
 				</div>
-			</Link>
+			</div>
 		</div>
 	);
 };
