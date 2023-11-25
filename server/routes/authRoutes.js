@@ -36,6 +36,7 @@ router.post('/login', async (req, res) => {
       res.cookie('token', token).json({
         id: userData._id,
         username,
+        avatar: userData.avatar
       });
     } else {
       res.status(400).json('Wrong credentials');
@@ -63,7 +64,7 @@ router.get('/profile', (req, res) => {
 
 router.post('/logout', (req, res) => {
   res.cookie('token', '').json('ok');
-   //todo redirect ro home 
+  
 });
 
 module.exports = router;
