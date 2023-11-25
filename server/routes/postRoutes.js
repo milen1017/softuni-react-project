@@ -111,7 +111,7 @@ router.get('/', async (req, res) => {
       }).populate('author', ['username']);
     } else {
       // If no search term is provided, fetch all entries
-      entries = await Entry.find().populate('author', ['username']);
+      entries = await Entry.find().sort({ createdAt: -1 }).populate('author', ['username']);
     }
 
     res.json(entries);
