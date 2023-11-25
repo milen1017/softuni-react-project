@@ -11,7 +11,7 @@ const CatalogCard = ({ title, summary, tags, cover, author, createdAt, _id }) =>
 					<div className="projcard-textbox">
 						<div className="projcard-title">{title}</div>
 						<div className="projcard-subtitle">
-							Posted by {author.username} at {formattedDate}
+							Posted by {author?.username} at {formattedDate}
 						</div>
 						<div className="projcard-bar" />
 						<div className="projcard-description">{summary}</div>

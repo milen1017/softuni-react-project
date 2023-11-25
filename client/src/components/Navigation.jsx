@@ -1,10 +1,9 @@
-import { useEffect, useState, useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import BASE_URL from "../config";
 
 const Navigation = () => {
-	// const [username, setUsername] = useState(null);
 	const { setUserInfo, userInfo } = useContext(UserContext);
 
 	useEffect(() => {
@@ -25,6 +24,7 @@ const Navigation = () => {
 			method: "POST",
 		});
 		setUserInfo(null);
+		 //todo redirect ro home 
 	}
 
 	const username = userInfo?.username;
@@ -37,6 +37,7 @@ const Navigation = () => {
 					<>
 						<Link to="/create">Create post</Link>
 						<Link to="/catalog">Catalog</Link>
+						<Link to="/profile">Profile</Link>
 						<a onClick={logout}>Logout</a>
 					</>
 				)}

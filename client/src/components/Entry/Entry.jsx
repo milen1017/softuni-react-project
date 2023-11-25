@@ -31,7 +31,7 @@ const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {
 							<h2>{title}</h2>
 							<p>
 								<span className="icon-link mr-3">
-									<i className="fa fa-pencil-square-o"></i>post by {author.username}
+									<i className="fa fa-pencil-square-o"></i>post by {author?.username}
 								</span>
 								<span className="icon-link">
 									<i className="fa fa-comments-o"></i> 150

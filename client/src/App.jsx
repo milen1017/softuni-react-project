@@ -9,6 +9,7 @@ import CreateEntry from "./components/CreateEntry";
 import EntryPage from "./components/EntryPage/EntryPage";
 import EditEntry from "./components/EditEntry";
 import Catalog from "./components/CatalogPage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 					<Route path="/post/:id" element={<EntryPage />} />
 					<Route path="/edit/:id" element={<EditEntry />} />
 					<Route path="/catalog" element={<Catalog />} />
+					<Route path="/profile" element={<ProfilePage />} />
 				</Route>
 				
 			</Routes>
