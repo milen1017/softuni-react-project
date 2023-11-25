@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
         console.error("Token verification failed:", err.message);
         res.status(401).json({ error: 'Unauthorized' });
       } else {
-        // Find the entry by ID and update its fields
+    
         const updatedEntry = await Entry.findByIdAndUpdate(
           postId,
           {
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
             likes,
             author: decoded.id,
           },
-          { new: true } // Return the updated entry
+          { new: true } 
         );
 
         if (!updatedEntry) {
@@ -95,7 +95,25 @@ router.delete('/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const entries = await Entry.find().populate('author', ['username']);
+    const searchTerm = req.query.q; // Get the search term from the query parameter
+
+    let entries;
+    if (searchTerm) {
+      // If a search term is provided, perform a search query across multiple fields
+      entries = await Entry.find({
+        $or: [
+          { title: { $regex: new RegExp(searchTerm, 'i') } },
+          { summary: { $regex: new RegExp(searchTerm, 'i') } },
+          { content: { $regex: new RegExp(searchTerm, 'i') } },
+          { tags: { $regex: new RegExp(searchTerm, 'i') } }
+          // Add more fields as needed for the search
+        ]
+      }).populate('author', ['username']);
+    } else {
+      // If no search term is provided, fetch all entries
+      entries = await Entry.find().populate('author', ['username']);
+    }
+
     res.json(entries);
   } catch (error) {
     console.error("Error fetching entries:", error);
