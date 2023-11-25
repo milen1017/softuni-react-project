@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import BASE_URL from "../config";
-//todo diplay errors
+
 function CreateEntry() {
 	const [title, setTitle] = useState("");
 	const [summary, setSummary] = useState("");

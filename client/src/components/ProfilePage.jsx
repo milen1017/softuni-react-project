@@ -5,6 +5,7 @@ import { UserContext } from "../UserContext";
 const ProfilePage = () => {
 	const { userInfo } = useContext(UserContext);
 	console.log(userInfo);
+  // todo edit profile functionality 
 	return (
         <div className="profile">
         <div className="profile-header">

@@ -10,6 +10,7 @@ import EntryPage from "./components/EntryPage/EntryPage";
 import EditEntry from "./components/EditEntry";
 import Catalog from "./components/CatalogPage";
 import ProfilePage from "./components/ProfilePage";
+import NotFoundPage from "./components/404/NotFoundPage";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/edit/:id" element={<EditEntry />} />
 					<Route path="/catalog" element={<Catalog />} />
 					<Route path="/profile" element={<ProfilePage />} />
+					<Route path="*" element={<NotFoundPage />} />
 				</Route>
 				
 			</Routes>

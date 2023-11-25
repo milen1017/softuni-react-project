@@ -88,7 +88,7 @@ button {
 }
 
 footer {
-	display: grid;
+	display: flex;
 }
 
 /* ProfilePage */
