@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {  useNavigate } from "react-router-dom";
+
 import BASE_URL from "../config"
 
 const Register = () => {
@@ -6,6 +8,7 @@ const Register = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [passwordsMatch, setPasswordsMatch] = useState(true);
+	const navigate = useNavigate();
 
 	async function register(ev) {
 		ev.preventDefault();
@@ -22,7 +25,8 @@ const Register = () => {
 		});
 
 		if (response.status === 200) {
-			alert("Registration successful");
+			alert("Congratulations! 🎉 Your registration was successful. You can now log in using your credentials.");
+			navigate("/login");
 		} else {
 			alert("Registration failed");
 		}

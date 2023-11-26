@@ -1,10 +1,11 @@
 import { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import BASE_URL from "../config";
 
 const Navigation = () => {
 	const { setUserInfo, userInfo } = useContext(UserContext);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		fetch(`${BASE_URL}/auth/profile`, { credentials: "include" })
@@ -19,12 +20,17 @@ const Navigation = () => {
 	}, []);
 
 	function logout() {
-		fetch(`${BASE_URL}/auth/logout`, {
-			credentials: "include",
-			method: "POST",
-		});
-		setUserInfo(null);
-		 //todo redirect ro home 
+		try {
+			fetch(`${BASE_URL}/auth/logout`, {
+				credentials: "include",
+				method: "POST",
+			});
+
+			setUserInfo(null);
+			navigate("/");
+		} catch (error) {
+			console.error("Logout error:", error);
+		}
 	}
 
 	const username = userInfo?.username;
