@@ -9,7 +9,7 @@ import CreateEntry from "./components/CreateEntry";
 import EntryPage from "./components/EntryPage/EntryPage";
 import EditEntry from "./components/EditEntry";
 import Catalog from "./components/CatalogPage";
-import ProfilePage from "./components/ProfilePage";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 import NotFoundPage from "./components/404/NotFoundPage";
 
 function App() {

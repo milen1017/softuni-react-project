@@ -50,15 +50,58 @@ router.post('/login', async (req, res) => {
 
 router.get('/profile', (req, res) => {
   const { token } = req.cookies;
-  jwt.verify(token, secretKey, (err, decoded) => {
-    if (err) {
-      console.error("Token verification failed:", err.message);
-      res.status(401).json({ error: 'Unauthorized' });
-    } else {
-      //   console.log('Token verified. Decoded payload:', decoded);
-      res.json(decoded);
+
+  try {
+    jwt.verify(token, secretKey, async (err, decoded) => {
+      if (err) {
+        console.error("Token verification failed:", err.message);
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+
+      // Find the user by ID using the decoded token data
+      const user = await User.findById(decoded.id);
+
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      // Respond with the user data
+      res.json({
+        id: user._id,
+        username: user.username,
+        avatar: user.avatar
+        // Add other user information you want to send
+      });
+    });
+  } catch (error) {
+    console.error("Error fetching user profile:", error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.put('/change-avatar', async (req, res) => {
+  const { token } = req.cookies;
+  const { avatar } = req.body;
+
+  try {
+    if (!token) {
+      return res.status(401).json({ error: 'Unauthorized: No token provided' });
     }
-  });
+
+    const decoded = jwt.verify(token, secretKey);
+
+   
+    const updatedUser = await User.findByIdAndUpdate(decoded.id, { avatar }, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ avatar: updatedUser.avatar });
+  } catch (error) {
+    console.error("Error changing avatar:", error);
+    res.status(500).json({ error: 'An error occurred while changing the avatar' });
+  }
 });
 
 

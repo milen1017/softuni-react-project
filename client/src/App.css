@@ -27,7 +27,7 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -moz-font-feature-settings: "liga" on;
+
   }
   
 img {
@@ -57,6 +57,9 @@ nav .auth-links {
 	display: flex;
 	gap: 15px;
 }
+nav .logout-link {
+	cursor: pointer;
+  }
 
 
 
@@ -91,39 +94,7 @@ footer {
 	display: flex;
 }
 
-/* ProfilePage */
 
-.profile {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
-	border-radius: 8px;
-	padding: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	text-align: center;
-  }
-  
-  .profile-header {
-	margin-bottom: 20px;
-  }
-  
-  .profile-header h2 {
-	font-size: 24px;
-	margin-bottom: 10px;
-  }
-  
-  .profile-header img {
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	object-fit: cover;
-	border: 2px solid #fff;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-header p {
-	font-size: 18px;
-	margin-top: 10px;
-  }
   
 
   

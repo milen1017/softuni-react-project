@@ -44,7 +44,9 @@ const Navigation = () => {
 						<Link to="/create">Create post</Link>
 						<Link to="/catalog">Catalog</Link>
 						<Link to="/profile">Profile</Link>
-						<a onClick={logout}>Logout</a>
+						<a onClick={logout} className="logout-link">
+							Logout
+						</a>
 					</>
 				)}
 				{!username && (
