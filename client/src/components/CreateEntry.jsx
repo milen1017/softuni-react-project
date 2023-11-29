@@ -10,7 +10,7 @@ function CreateEntry() {
 	const [content, setContent] = useState("");
 	const [cover, setCover] = useState("");
 	const [tags, setTags] = useState([]);
-	const [likes, setLikes] = useState(0); //todo
+
 	const [redirect, setRedirect] = useState(false);
 
 	// Error states for each input
@@ -48,7 +48,6 @@ function CreateEntry() {
 			content,
 			cover,
 			tags,
-			likes,
 		};
 
 		try {
@@ -126,7 +125,7 @@ function CreateEntry() {
 				style={{ border: tagsError ? "1px solid red" : "" }}
 			/>
 			{tagsError && <p style={{ color: "red" }}>Tags are required</p>}
-			<p>Likes: {likes}</p>
+
 			<button type="submit">Create Entry</button>
 		</form>
 	);

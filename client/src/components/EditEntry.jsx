@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import BASE_URL from "../config";
 
 function EditEntry() {
-	const { id } = useParams(); 
+	const { id } = useParams();
 	const [title, setTitle] = useState("");
 	const [summary, setSummary] = useState("");
 	const [content, setContent] = useState("");
@@ -13,14 +13,13 @@ function EditEntry() {
 	const [tags, setTags] = useState([]);
 	const [likes, setLikes] = useState(0);
 
-
 	// Error states for each input
 	const [titleError, setTitleError] = useState(false);
 	const [summaryError, setSummaryError] = useState(false);
 	const [contentError, setContentError] = useState(false);
 	const [coverError, setCoverError] = useState(false);
 	const [tagsError, setTagsError] = useState(false);
-	
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -77,7 +76,6 @@ function EditEntry() {
 			content,
 			cover,
 			tags,
-			likes,
 		};
 
 		try {
@@ -95,11 +93,9 @@ function EditEntry() {
 				navigate(`/post/${id}`);
 			} else {
 				console.error("Failed to create entry.");
-				
 			}
 		} catch (error) {
 			console.error("Error creating entry:", error);
-			
 		}
 	};
 
@@ -152,7 +148,7 @@ function EditEntry() {
 				style={{ border: tagsError ? "1px solid red" : "" }}
 			/>
 			{tagsError && <p style={{ color: "red" }}>Tags are required</p>}
-			<p>Likes: {likes}</p>
+
 			<button type="submit">Edit Entry</button>
 		</form>
 	);
