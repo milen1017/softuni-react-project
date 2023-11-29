@@ -1,5 +1,7 @@
 import "./Entry.css";
 import { Link } from "react-router-dom";
+import '@fortawesome/fontawesome-free/css/all.css'
+
 
 
 const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {

@@ -72,6 +72,8 @@
 	left: 430px;
 	width: calc(100% - 470px);
 	font-size: 17px;
+	text-decoration: none; 
+
 }
 .projcard:nth-child(2n) .projcard-textbox {
 	left: initial;
@@ -89,6 +91,7 @@
 	height: 140%;
 	width: 60px;
 	transform: rotate(8deg);
+	
 }
 .projcard:nth-child(2n) .projcard-textbox::before {
 	display: none;
@@ -107,10 +110,19 @@
 .projcard-title {
 	font-family: 'Voces', 'Open Sans', arial, sans-serif;
 	font-size: 24px;
+	text-decoration: none;
+	color: inherit;
 }
 .projcard-subtitle {
 	font-family: 'Voces', 'Open Sans', arial, sans-serif;
 	color: #888;
+	text-decoration: none;
+	color: inherit;
+}
+.custom-link .projcard-title,
+.custom-link .projcard-subtitle {
+	text-decoration: none; /* Remove underlines */
+	color: #888; /* Update color */
 }
 .projcard-bar {
 	left: -2px;
@@ -173,6 +185,20 @@
 	border-top: 13px solid transparent;
 	right: -10px;
 	top: 0;
+}
+.like-button {
+    display: block;
+    align-items: left;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.like-icon {
+    margin-right: 5px; 
 }
 
 /* Color Theme Swatches in Hex */

@@ -58,7 +58,7 @@ router.get('/profile', (req, res) => {
         return res.status(401).json({ error: 'Unauthorized' });
       }
 
-      // Find the user by ID using the decoded token data
+      
       const user = await User.findById(decoded.id);
 
       if (!user) {
