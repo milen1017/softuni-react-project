@@ -1,54 +1,73 @@
 import React, { useState, useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import BASE_URL from "../config";
 
 function EditEntry() {
-  const { id } = useParams(); // Get the entry ID from the URL params
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [content, setContent] = useState("");
-  const [cover, setCover] = useState("");
-  const [tags, setTags] = useState([]);
-  const [likes, setLikes] = useState(0);
-  const [redirect, setRedirect] = useState(false);
+	const { id } = useParams(); 
+	const [title, setTitle] = useState("");
+	const [summary, setSummary] = useState("");
+	const [content, setContent] = useState("");
+	const [cover, setCover] = useState("");
+	const [tags, setTags] = useState([]);
+	const [likes, setLikes] = useState(0);
 
-  useEffect(() => {
-    const fetchEntry = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/posts/${id}`, {
-          credentials: "include",
-        });
 
-        if (response.ok) {
-          const entryData = await response.json();
-          setTitle(entryData.title);
-          setSummary(entryData.summary);
-          setContent(entryData.content);
-          setCover(entryData.cover);
-          setTags(entryData.tags);
-          setLikes(entryData.likes);
-        } else {
-          console.error("Failed to fetch entry.");
-          // Handle error scenarios
-        }
-      } catch (error) {
-        console.error("Error fetching entry:", error);
-        // Handle network errors or other exceptions
-      }
-    };
+	// Error states for each input
+	const [titleError, setTitleError] = useState(false);
+	const [summaryError, setSummaryError] = useState(false);
+	const [contentError, setContentError] = useState(false);
+	const [coverError, setCoverError] = useState(false);
+	const [tagsError, setTagsError] = useState(false);
+	
+	const navigate = useNavigate();
 
-    fetchEntry();
-  }, [id]);
+	useEffect(() => {
+		const fetchEntry = async () => {
+			try {
+				const response = await fetch(`${BASE_URL}/posts/${id}`, {
+					credentials: "include",
+				});
 
-    
+				if (response.ok) {
+					const entryData = await response.json();
+					setTitle(entryData.title);
+					setSummary(entryData.summary);
+					setContent(entryData.content);
+					setCover(entryData.cover);
+					setTags(entryData.tags);
+					setLikes(entryData.likes);
+				} else {
+					console.error("Failed to fetch entry.");
+				}
+			} catch (error) {
+				console.error("Error fetching entry:", error);
+			}
+		};
+
+		fetchEntry();
+	}, [id]);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		if (!title || !summary || !content || !cover || tags.length === 0) {
+
+		if (
+			!title ||
+			!summary ||
+			!content ||
+			content === "<p><br></p>" ||
+			!cover ||
+			tags.length === 0 ||
+			tags[0] === ""
+		) {
+			// Set error states for empty fields
+			setTitleError(!title);
+			setSummaryError(!summary);
+			setContentError(!content || content === "<p><br></p>");
+			setCoverError(!cover);
+			setTagsError(tags.length === 0 || tags[0] === "");
 			console.error("All fields are required.");
-			// display error message or set state to show the error to the user
 			return;
 		}
 
@@ -73,14 +92,14 @@ function EditEntry() {
 
 			if (response.ok) {
 				console.log("Entry successfully created.");
-				setRedirect(true);
+				navigate(`/post/${id}`);
 			} else {
 				console.error("Failed to create entry.");
-				// Handle error scenarios (e.g., display error message)
+				
 			}
 		} catch (error) {
 			console.error("Error creating entry:", error);
-			// Handle network errors or other exceptions
+			
 		}
 	};
 
@@ -88,10 +107,8 @@ function EditEntry() {
 		const tagsString = e.target.value;
 		const tagsArray = tagsString.split(",").map((tag) => tag.trim());
 		setTags(tagsArray);
+		setTagsError(tagsArray.length === 0);
 	};
-	if (redirect) {
-		return <Navigate to={"/"} />;
-	}
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -100,30 +117,41 @@ function EditEntry() {
 				placeholder="Title"
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
+				style={{ border: titleError ? "1px solid red" : "" }}
 			/>
+			{titleError && <p style={{ color: "red" }}>Title is required</p>}
 			<input
 				type="text"
 				placeholder="Summary"
 				value={summary}
 				onChange={(e) => setSummary(e.target.value)}
+				style={{ border: summaryError ? "1px solid red" : "" }}
 			/>
+			{summaryError && <p style={{ color: "red" }}>Summary is required</p>}
+
 			<ReactQuill
 				theme="snow"
 				value={content}
-				onChange={(value) => setContent(value)} // Update content state directly here
+				onChange={(value) => setContent(value)}
+				style={{ border: contentError ? "1px solid red" : "" }}
 			/>
+			{contentError && <p style={{ color: "red" }}>Content is required</p>}
 			<input
 				type="text"
 				placeholder="Cover Image URL"
 				value={cover}
 				onChange={(e) => setCover(e.target.value)}
+				style={{ border: coverError ? "1px solid red" : "" }}
 			/>
+			{coverError && <p style={{ color: "red" }}>Cover is required</p>}
 			<input
 				type="text"
 				placeholder="Tags (comma-separated)"
 				value={tags.join(",")} // Convert array back to comma-separated string for input value
 				onChange={handleTagsChange} // Use handleTagsChange to update the tags state
+				style={{ border: tagsError ? "1px solid red" : "" }}
 			/>
+			{tagsError && <p style={{ color: "red" }}>Tags are required</p>}
 			<p>Likes: {likes}</p>
 			<button type="submit">Edit Entry</button>
 		</form>

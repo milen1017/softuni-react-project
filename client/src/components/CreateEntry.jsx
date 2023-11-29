@@ -13,11 +13,32 @@ function CreateEntry() {
 	const [likes, setLikes] = useState(0); //todo
 	const [redirect, setRedirect] = useState(false);
 
+	// Error states for each input
+	const [titleError, setTitleError] = useState(false);
+	const [summaryError, setSummaryError] = useState(false);
+	const [contentError, setContentError] = useState(false);
+	const [coverError, setCoverError] = useState(false);
+	const [tagsError, setTagsError] = useState(false);
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		if (!title || !summary || !content || !cover || tags.length === 0) {
+
+		if (
+			!title ||
+			!summary ||
+			!content ||
+			content === "<p><br></p>" ||
+			!cover ||
+			tags.length === 0 ||
+			tags[0] === ""
+		) {
+			// Set error states for empty fields
+			setTitleError(!title);
+			setSummaryError(!summary);
+			setContentError(!content || content === "<p><br></p>");
+			setCoverError(!cover);
+			setTagsError(tags.length === 0 || tags[0] === "");
 			console.error("All fields are required.");
-			// display error message or set state to show the error to the user
 			return;
 		}
 
@@ -69,30 +90,42 @@ function CreateEntry() {
 				placeholder="Title"
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
+				style={{ border: titleError ? "1px solid red" : "" }}
 			/>
+			{titleError && <p style={{ color: "red" }}>Title is required</p>}
+
 			<input
 				type="text"
 				placeholder="Summary"
 				value={summary}
 				onChange={(e) => setSummary(e.target.value)}
+				style={{ border: summaryError ? "1px solid red" : "" }}
 			/>
+			{summaryError && <p style={{ color: "red" }}>Summary is required</p>}
+
 			<ReactQuill
 				theme="snow"
 				value={content}
-				onChange={(value) => setContent(value)} // Update content state directly here
+				onChange={(value) => setContent(value)}
+				style={{ border: contentError ? "1px solid red" : "" }}
 			/>
+			{contentError && <p style={{ color: "red" }}>Content is required</p>}
 			<input
 				type="text"
 				placeholder="Cover Image URL"
 				value={cover}
 				onChange={(e) => setCover(e.target.value)}
+				style={{ border: coverError ? "1px solid red" : "" }}
 			/>
+			{coverError && <p style={{ color: "red" }}>Cover is required</p>}
 			<input
 				type="text"
 				placeholder="Tags (comma-separated)"
 				value={tags.join(",")} // Convert array back to comma-separated string for input value
 				onChange={handleTagsChange} // Use handleTagsChange to update the tags state
+				style={{ border: tagsError ? "1px solid red" : "" }}
 			/>
+			{tagsError && <p style={{ color: "red" }}>Tags are required</p>}
 			<p>Likes: {likes}</p>
 			<button type="submit">Create Entry</button>
 		</form>
