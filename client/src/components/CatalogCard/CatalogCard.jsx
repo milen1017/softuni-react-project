@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "./CatalogCard.css";
+import { useState } from "react";
+import {handleLikeClick} from '../../utils'
+
+import BASE_URL from "../../config";
 
 const CatalogCard = ({
 	title,
@@ -15,12 +19,12 @@ const CatalogCard = ({
 	likes
 }) => {
 	const formattedDate = new Date(createdAt).toLocaleString();
+	const [currentLikes, setCurrentLikes] = useState(likes);
+	const [hasLiked, setHasLiked] = useState(false);
 
-	
-	const handleLikeClick = () => {
-	
-		console.log("Like button clicked!");
-	};
+	const onClickLike = () => {
+		handleLikeClick(_id, currentLikes, setCurrentLikes, setHasLiked);
+	  };
 
 	return (
 		<div className="projcard projcard-blue">
@@ -35,8 +39,11 @@ const CatalogCard = ({
 							Posted by {author?.username} at {formattedDate}
 						</div>
 					</Link>
+					<div className="likes-count">Likes: {currentLikes}</div>
+					{hasLiked && <div className="already-liked">You've already liked this post</div>} {/* Display message when already liked */}
 					<div className="projcard-bar" />
 					<div className="projcard-description">{summary}</div>
+
 					<div className="projcard-tagbox">
 						{tags.map((tag, index) => (
 							<span key={index} className="projcard-tag">
@@ -44,8 +51,8 @@ const CatalogCard = ({
 							</span>
 						))}
 					</div>
-					
-					<button className="like-button" onClick={handleLikeClick}>
+
+					<button className="like-button" onClick={onClickLike}>
 						<FontAwesomeIcon icon={faHeart} className="like-icon" />
 						Like
 					</button>

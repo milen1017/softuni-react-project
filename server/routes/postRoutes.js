@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-
 const Entry = require('../models/Entry');
+const User = require('../models/User');
+
 
 const { secretKey } = require("../config");
 
@@ -126,5 +127,53 @@ router.get('/:id', async (req, res) => {
   const postDoc = await Entry.findById(id).populate('author', ['username']);
   res.json(postDoc);
 })
+
+router.put('/:id/like', async (req, res) => {
+  const { id } = req.params;
+
+  // Retrieve the token from cookies
+  const { token } = req.cookies;// Check the cookie name for the token
+
+  try {
+    if (!token) {
+      return res.status(401).json({ error: 'Unauthorized: No token provided' });
+    }
+    const decoded = jwt.verify(token, secretKey);
+   
+    const user = await User.findById(decoded.id);
+    // Retrieve the post by ID
+    const post = await Entry.findById(id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    if (user.likedPosts.includes(id)) {
+      return res.status(400).json({ error: 'User has already liked the post' });
+    }
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    // Check if the post is not already in the user's likedPosts array
+    if (!user.likedPosts.includes(id)) {
+      user.likedPosts.push(id);
+      await user.save();
+    }
+
+    // Increment the like count by 1 (adjust based on your requirements)
+    post.likes += 1;
+
+    // Save the updated post with the incremented like count
+    await post.save();
+
+    res.json({ message: 'Like count updated successfully', likes: post.likes });
+  } catch (error) {
+    console.error('Error updating like count:', error.message);
+    if (error.name === 'JsonWebTokenError') {
+      res.status(401).json({ error: 'Unauthorized' });
+    } else {
+      res.status(500).json({ error: 'Server error' });
+    }
+  }
+});
 
 module.exports = router;
