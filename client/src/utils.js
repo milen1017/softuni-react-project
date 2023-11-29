@@ -32,3 +32,13 @@ export const handleLikeClick = async (
 		console.error("Error updating like count:", error);
 	}
 };
+
+export const getDayAndMonth = (inputDate) => {
+	const date = new Date(inputDate);
+	const day = date.getDate();
+	const month = date
+		.toLocaleString("default", { month: "short" })
+		.toUpperCase();
+
+	return { day, month };
+};

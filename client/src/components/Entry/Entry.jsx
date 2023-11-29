@@ -1,11 +1,13 @@
 import "./Entry.css";
 import { Link } from "react-router-dom";
+import { getDayAndMonth } from "../../utils";
 import '@fortawesome/fontawesome-free/css/all.css'
 
 
 
 const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {
-	// todo fix date
+	const { day, month } = getDayAndMonth(createdAt)
+	
 	return (
 		<div className="container mt-5">
 			<div className="row">
@@ -25,8 +27,8 @@ const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {
 						</div>
 						<div className="blog-card__head">
 							<span className="date__box">
-								<span className="date__day">11</span>
-								<span className="date__month">JAN</span>
+								<span className="date__day">{day}</span>
+								<span className="date__month">{month}</span>
 							</span>
 						</div>
 						<div className="blog-card__info">
