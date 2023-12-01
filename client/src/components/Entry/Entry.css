@@ -3,9 +3,7 @@
 	--text-color: #363738;
   }
   
-  body {
-	background: #eee;
-  }
+
   
   .date__box {
 	position: absolute;
@@ -26,6 +24,7 @@
   .blog-card {
 	padding: 30px;
 	position: relative;
+	
   }
   
   .blog-card .date__box {
@@ -47,6 +46,7 @@
   .blog-card .blog-card__background {
 	padding: 15px;
 	background: white;
+	border-radius: 10px;
   }
   
   .blog-card .card__background--wrapper {
@@ -54,6 +54,7 @@
 	clip-path: polygon(0 0, 100% 0, 100% 80%, 0 60%);
 	position: relative;
 	overflow: hidden;
+	border-radius: 10px;
   }
   
   .blog-card .card__background--main {
@@ -63,6 +64,7 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size:   cover;
+	
   }
   
   .blog-card .card__background--layer {
@@ -83,6 +85,7 @@
 	z-index: 10;
 	background: white;
 	padding: 20px 15px;
+	
   }
   
   .blog-card .blog-card__info h5 {
@@ -146,6 +149,7 @@
   
   .btn.btn--with-icon {
 	padding-right: 20px;
+	border-radius: 10px;
   }
   
   .btn.btn--with-icon i {

@@ -3,7 +3,7 @@ import "./App.css";
 import Layout from "./components/Layout";
 import { UserContextProvider } from "./UserContext";
 import Home from "./components/Home";
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import Register from "./components/Register";
 import CreateEntry from "./components/CreateEntry";
 import EntryPage from "./components/EntryPage/EntryPage";

@@ -1,16 +1,4 @@
-/* 
-
-.button-container {
-	display: flex;
-	gap: 10px; 
-    text-decoration: none;
-}
-
-.button-container button {
-
-	width: 150px;
-	text-decoration: none;
-}
-
-
- */
+.entry-page-container {
+	background-color: #f0f0f0; 
+	padding: 40px;
+  }

@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
-import BASE_URL from "../config"
+import { UserContext } from "../../UserContext";
+import BASE_URL from "../../config"
+import "./Login.css";
+
 
 const Login = () => {
   const [username, setUsername] = useState("");

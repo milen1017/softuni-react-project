@@ -101,14 +101,15 @@ function CreateEntry() {
 				style={{ border: summaryError ? "1px solid red" : "" }}
 			/>
 			{summaryError && <p style={{ color: "red" }}>Summary is required</p>}
-
-			<ReactQuill
-				theme="snow"
-				value={content}
-				onChange={(value) => setContent(value)}
-				style={{ border: contentError ? "1px solid red" : "" }}
-			/>
-			{contentError && <p style={{ color: "red" }}>Content is required</p>}
+			<div className="quill-wrapper">
+				<ReactQuill
+					theme="snow"
+					value={content}
+					onChange={(value) => setContent(value)}
+					style={{ border: contentError ? "1px solid red" : "" }}
+				/>
+				{contentError && <p style={{ color: "red" }}>Content is required</p>}
+			</div>
 			<input
 				type="text"
 				placeholder="Cover Image URL"

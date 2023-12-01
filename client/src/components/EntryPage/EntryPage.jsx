@@ -57,23 +57,25 @@ export default function EntryPage() {
 
 	return (
 		<>
-			<h1>{postInfo.title}</h1>
-			<p>Summary: {postInfo.summary}</p>
-			<img src={postInfo.cover} alt={postInfo.title} />
-			<div dangerouslySetInnerHTML={{ __html: postInfo.content }} />
-			<p>Likes: {postInfo.likes}</p>
-			<p>Posted by {postInfo.author?.username}</p>
-			<p>Created At: {postInfo.createdAt}</p>
+			<div className="entry-page-container">
+				<h1>{postInfo.title}</h1>
+				<p>Summary: {postInfo.summary}</p>
+				<img src={postInfo.cover} alt={postInfo.title} />
+				<div dangerouslySetInnerHTML={{ __html: postInfo.content }} />
+				<p>Likes: {postInfo.likes}</p>
+				<p>Posted by {postInfo.author?.username}</p>
+				<p>Created At: {postInfo.createdAt}</p>
 
-			{canEditOrDelete && (
-				<div className="button-container">
-					<Link to={`/edit/${id}`}>
-						<button>Edit</button>
-					</Link>
+				{canEditOrDelete && (
+					<div className="button-container">
+						<Link to={`/edit/${id}`}>
+							<button>Edit</button>
+						</Link>
 
-					<button onClick={handleDelete}>Delete</button>
-				</div>
-			)}
+						<button onClick={handleDelete}>Delete</button>
+					</div>
+				)}
+			</div>
 		</>
 	);
 }

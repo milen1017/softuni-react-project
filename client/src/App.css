@@ -7,12 +7,7 @@
 	--gray-lightest: #f1f1f1;
 }
 
-/* Global styles */
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
+
 
 body {
 	color: var(--gray);
@@ -24,6 +19,14 @@ body {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	background: url("https://www.hdwallpaperslife.com/wp-content/uploads/2017/11/cool_mountains_4k-HD.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+	place-items: center;
 }
 
 img {
@@ -41,7 +44,7 @@ nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 20px; /* Adjust margin as needed */
+	margin-bottom: 20px;
 }
 
 nav .auth-links {
@@ -66,19 +69,32 @@ input {
 	border-radius: 5px;
 	background-color: #fff;
 }
+
 button {
 	cursor: pointer;
-	width: 100%;
-	display: block;
-	background-color: #555;
-	border: 0;
-	color: #fff;
+	width: 50%;
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	border: 2px solid #0088ff; /* Add a solid border */
+	color: #0088ff;
 	border-radius: 5px;
-	padding: 7px 0;
+	padding: 10px 20px; /* Adjust padding as needed */
+	text-transform: uppercase;
+	font-weight: 600;
+	transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for color change */
+	justify-content: center;
 }
 
+button:hover {
+	background-color: #0088ff; /* Change background on hover */
+	color: #fff; /* Change text color on hover */
+}
 footer {
-	display: flex;
+	display: block;
+	
+	
 }
 
 .search-bar {
@@ -94,5 +110,18 @@ footer {
 a {
 	text-decoration: none;
 
-	color: inherit; /* Ensure links use the inherited color */
+	color: inherit;
+	transition: text-shadow 0.3s ease;
 }
+a:hover {
+	color: #0088ff;
+	text-shadow: 0 0 3px #0088ff;
+	
+  }
+
+.quill-wrapper {
+	background-color: #ffffff; /* Set your desired white background color */
+	padding: px; /* Adjust padding as needed */
+	border-radius: 8px; /* Add border radius if desired */
+	/* Any other styles */
+  }
