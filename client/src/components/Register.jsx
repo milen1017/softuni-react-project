@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate,Link } from "react-router-dom";
 
 import BASE_URL from "../config"
 
@@ -63,6 +63,7 @@ const Register = () => {
 				<p style={{ color: "red" }}>Passwords do not match</p>
 			)}
 			<button>Register</button>
+			<Link to="/login">Existing Member? Log In Here.</Link>
 		</form>
 	);
 };

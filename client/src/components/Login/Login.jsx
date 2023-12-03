@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate,Link} from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import BASE_URL from "../../config"
 import "./Login.css";
@@ -57,7 +57,9 @@ const Login = () => {
       />
       {wrongCredentials && <p style={{ color: "red" }}>Wrong credentials</p>}
       <button type="submit">Login</button>
+      <Link to="/register"> New Here? Sign Up Now to Create Your Account.</Link>
     </form>
+  
   );
 };
 
