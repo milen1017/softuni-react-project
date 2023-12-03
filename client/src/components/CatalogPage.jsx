@@ -6,9 +6,10 @@ import BASE_URL from "../config";
 import '@fortawesome/fontawesome-free/css/all.css';
 
 
-const Catalog = () => {
+const Catalog = ({ predefinedSearchTerm = "" ,showSearchBar = true }) => {
   const [entries, setEntries] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(predefinedSearchTerm);
+  
 
   useEffect(() => {
 
@@ -36,6 +37,7 @@ const Catalog = () => {
 
   return (
     <div className="logo">
+       {showSearchBar && (
     <div className="search-bar">
       <FontAwesomeIcon icon={faSearch} className="search-icon" />
       <input
@@ -45,6 +47,7 @@ const Catalog = () => {
         onChange={handleSearchInputChange}
       />
     </div>
+     )}
     {entries.length > 0 ? (
       entries.map((entry) => (
         <CatalogCard key={entry._id} {...entry} />

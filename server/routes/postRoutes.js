@@ -10,33 +10,35 @@ const { secretKey } = require("../config");
 
 router.get("/", async (req, res) => {
 	try {
-		const searchTerm = req.query.q; // Get the search term from the query parameter
-
-		let entries;
-		if (searchTerm) {
-			// If a search term is provided, perform a search query across multiple fields
-			entries = await Entry.find({
-				$or: [
-					{ title: { $regex: new RegExp(searchTerm, "i") } },
-					{ summary: { $regex: new RegExp(searchTerm, "i") } },
-					{ content: { $regex: new RegExp(searchTerm, "i") } },
-					{ tags: { $regex: new RegExp(searchTerm, "i") } },
-					// Add more fields as needed for the search
-				],
-			}).populate("author", ["username"]);
-		} else {
-			// If no search term is provided, fetch all entries
-			entries = await Entry.find()
-				.sort({ createdAt: -1 })
-				.populate("author", ["username"]);
-		}
-
-		res.json(entries);
+	  const searchTerm = req.query.q; // Get the search term from the query parameter
+  
+	  let entries;
+  
+	  if (searchTerm) {
+		// If a search term is provided
+		entries = await Entry.find({
+		  $or: [
+			{ title: { $regex: new RegExp(searchTerm, "i") } },
+			{ summary: { $regex: new RegExp(searchTerm, "i") } },
+			{ content: { $regex: new RegExp(searchTerm, "i") } },
+			{ tags: { $regex: new RegExp(searchTerm, "i") } },
+			{ author: searchTerm }, // Search by authorId
+			
+		  ],
+		}).populate("author", ["username"]);
+	  } else {
+		// If no search term is provided, fetch all entries
+		entries = await Entry.find()
+		  .sort({ createdAt: -1 })
+		  .populate("author", ["username"]);
+	  }
+  
+	  res.json(entries);
 	} catch (error) {
-		console.error("Error fetching entries:", error);
-		res.status(500).json({ error: "Failed to fetch entries" });
+	  console.error("Error fetching entries:", error);
+	  res.status(500).json({ error: "Failed to fetch entries" });
 	}
-});
+  });
 
 router.post("/", async (req, res) => {
 	try {
