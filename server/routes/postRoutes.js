@@ -15,17 +15,23 @@ router.get("/", async (req, res) => {
 	  let entries;
   
 	  if (searchTerm) {
-		// If a search term is provided
 		entries = await Entry.find({
 		  $or: [
 			{ title: { $regex: new RegExp(searchTerm, "i") } },
 			{ summary: { $regex: new RegExp(searchTerm, "i") } },
 			{ content: { $regex: new RegExp(searchTerm, "i") } },
 			{ tags: { $regex: new RegExp(searchTerm, "i") } },
-			{ author: searchTerm }, // Search by authorId
-			
+			// Add more fields as needed for the search
 		  ],
 		}).populate("author", ["username"]);
+  
+		// Check if searchTerm matches an authorId pattern (you may need to adjust this validation)
+		const isAuthorId = /^[0-9a-fA-F]{24}$/.test(searchTerm);
+  
+		if (isAuthorId) {
+		  // If the searchTerm is an authorId, perform search specifically by author
+		  entries = await Entry.find({ author: searchTerm }).populate("author", ["username"]);
+		}
 	  } else {
 		// If no search term is provided, fetch all entries
 		entries = await Entry.find()
@@ -39,6 +45,10 @@ router.get("/", async (req, res) => {
 	  res.status(500).json({ error: "Failed to fetch entries" });
 	}
   });
+  
+
+
+
 
 router.post("/", async (req, res) => {
 	try {

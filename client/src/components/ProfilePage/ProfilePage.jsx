@@ -46,12 +46,11 @@ const ProfilePage = () => {
 		<div className="profile">
 			<div className="profile-header">
 				<h2>User Profile</h2>
-				<img
-					src={userInfo.avatar}
-					alt="User Avatar"
-					onClick={toggleEdit}
-					style={{ cursor: "pointer" }}
-				/>
+				<div className="avatar-container" onClick={toggleEdit}>
+					<img src={userInfo.avatar} alt="User Avatar" />
+					<p className="avatar-text">Change Avatar</p>
+				</div>
+
 				<p>Username: {userInfo.username}</p>
 				{isEditing && (
 					<div>

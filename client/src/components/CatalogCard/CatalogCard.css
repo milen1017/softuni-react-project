@@ -187,24 +187,17 @@
 	top: 0;
 }
 .like-button {
-    display: block;
+    display: flex;
     align-items: left;
     background: none;
     border: none;
     color: #555;
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
     margin-top: 15px;
 }
 
 .like-icon {
     margin-right: 5px; 
 }
-
-/* Color Theme Swatches in Hex */
-.Palette-Martini-Racing-1-hex { color: #CDD4DA; }
-.Palette-Martini-Racing-2-hex { color: #EBEEF3; }
-.Palette-Martini-Racing-3-hex { color: #B8E4F1; }
-.Palette-Martini-Racing-4-hex { color: #060E2E; }
-.Palette-Martini-Racing-5-hex { color: #FF1A03; }
 

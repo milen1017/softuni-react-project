@@ -35,6 +35,12 @@ const Catalog = ({ predefinedSearchTerm = "" ,showSearchBar = true }) => {
     setSearchTerm(event.target.value);
   };
 
+  const handleTagClick = (tag) => {
+    // Do something with the clicked tag in the Catalog component
+    console.log(`Clicked tag: ${tag}`);
+    setSearchTerm(tag)
+  };
+
   return (
     <div className="logo">
        {showSearchBar && (
@@ -50,7 +56,7 @@ const Catalog = ({ predefinedSearchTerm = "" ,showSearchBar = true }) => {
      )}
     {entries.length > 0 ? (
       entries.map((entry) => (
-        <CatalogCard key={entry._id} {...entry} />
+        <CatalogCard key={entry._id} {...entry}  onTagClick={handleTagClick} />
       ))
     ) : (
       <p>No matching posts found.</p>
