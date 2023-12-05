@@ -9,6 +9,8 @@ import '@fortawesome/fontawesome-free/css/all.css';
 const Catalog = ({ predefinedSearchTerm = "" ,showSearchBar = true }) => {
   const [entries, setEntries] = useState([]);
   const [searchTerm, setSearchTerm] = useState(predefinedSearchTerm);
+  const [previousSearchTerm, setPreviousSearchTerm] = useState("");
+
   
 
   useEffect(() => {
@@ -36,9 +38,15 @@ const Catalog = ({ predefinedSearchTerm = "" ,showSearchBar = true }) => {
   };
 
   const handleTagClick = (tag) => {
-    // Do something with the clicked tag in the Catalog component
-    console.log(`Clicked tag: ${tag}`);
-    setSearchTerm(tag)
+   
+    if (previousSearchTerm === tag) {
+      setSearchTerm("");
+      setPreviousSearchTerm("");
+    } else {
+      setSearchTerm(tag);
+      setPreviousSearchTerm(tag);
+      
+    }
   };
 
   return (
