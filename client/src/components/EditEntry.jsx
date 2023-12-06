@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../UserContext";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import BASE_URL from "../config";
@@ -21,6 +22,13 @@ function EditEntry() {
 	const [tagsError, setTagsError] = useState(false);
 
 	const navigate = useNavigate();
+	const { userInfo } = useContext(UserContext);
+	useEffect(() => {
+		if (userInfo && userInfo.error === "Unauthorized") {
+			alert("You must log in to access this area of the application.");
+			navigate("/login");
+		}
+	}, [userInfo, navigate]);
 
 	useEffect(() => {
 		const fetchEntry = async () => {

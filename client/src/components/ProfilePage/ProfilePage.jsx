@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../UserContext";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import BASE_URL from "../../config";
 import Catalog from "../CatalogPage";
 import "./ProfilePage.css";
@@ -10,6 +11,13 @@ const ProfilePage = () => {
 	const [newAvatar, setNewAvatar] = useState("");
 	const [showCatalog, setShowCatalog] = useState(false);
 	const [predefinedSearchTerm, setPredefinedSearchTerm] = useState(userInfo.id);
+	const navigate = useNavigate();
+
+	if (userInfo && userInfo.error === "Unauthorized") {
+		alert("You must log in to access this area of the application.");
+		navigate("/login");
+		return null;
+	}
 
 	const handleAvatarChange = async () => {
 		try {

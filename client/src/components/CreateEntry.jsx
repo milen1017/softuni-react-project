@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
+
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import BASE_URL from "../config";
@@ -12,6 +14,15 @@ function CreateEntry() {
 	const [tags, setTags] = useState([]);
 
 	const [redirect, setRedirect] = useState(false);
+	const navigate = useNavigate();
+	const { userInfo } = useContext(UserContext);
+
+	useEffect(() => {
+		if (userInfo && userInfo.error === "Unauthorized") {
+			alert("You must log in to access this area of the application.");
+			navigate("/login");
+		}
+	}, [userInfo, navigate]);
 
 	// Error states for each input
 	const [titleError, setTitleError] = useState(false);
@@ -78,9 +89,12 @@ function CreateEntry() {
 		const tagsArray = tagsString.split(",").map((tag) => tag.trim());
 		setTags(tagsArray);
 	};
-	if (redirect) {
-		return <Navigate to={"/"} />;
-	}
+	useEffect(() => {
+		if (redirect) {
+			navigate("/");
+			//todo navigate to post id
+		}
+	}, [redirect, navigate]);
 
 	return (
 		<form onSubmit={handleSubmit}>
