@@ -16,7 +16,6 @@ const CatalogCard = ({
 	_id,
 	likes,
 	onTagClick,
-	
 }) => {
 	const formattedDate = new Date(createdAt).toLocaleString();
 	const [currentLikes, setCurrentLikes] = useState(likes);
@@ -25,7 +24,6 @@ const CatalogCard = ({
 	const onClickLike = () => {
 		handleLikeClick(_id, currentLikes, setCurrentLikes, setHasLiked);
 	};
-
 
 	return (
 		<div className="projcard projcard-blue">
@@ -47,22 +45,21 @@ const CatalogCard = ({
 					{/* Display message when already liked */}
 					<div className="projcard-bar" />
 					<div className="projcard-description">{summary}</div>
-					<button className="like-button" onClick={onClickLike}>
+					<a className="like-button" onClick={onClickLike}>
 						<FontAwesomeIcon icon={faHeart} className="like-icon" />
 						Like
-					</button>
+					</a>
 					<div>
 						{tags.map((tag, index) => (
 							<span
-							key={index}
-							className="projcard-tag"
-							onClick={() => {
-							
-							  onTagClick(tag); // Call the callback function with the clicked tag
-							}}
-						  >
-							{tag}
-						  </span>
+								key={index}
+								className="projcard-tag"
+								onClick={() => {
+									onTagClick(tag); // Call the callback function with the clicked tag
+								}}
+							>
+								{tag}
+							</span>
 						))}
 					</div>
 				</div>

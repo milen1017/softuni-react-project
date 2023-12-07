@@ -1,4 +1,3 @@
-
 .projcard-container,
 .projcard-container * {
 	box-sizing: border-box;
@@ -19,11 +18,11 @@
 	font-size: 18px;
 	overflow: hidden;
 	cursor: pointer;
-	box-shadow: 0 4px 21px -12px rgba(0, 0, 0, .66);
+	box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
 	transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 .projcard:hover {
-	box-shadow: 0 34px 32px -33px rgba(0, 0, 0, .18);
+	box-shadow: 0 34px 32px -33px rgba(0, 0, 0, 0.18);
 	transform: translate(0px, -3px);
 }
 .projcard::before {
@@ -72,8 +71,7 @@
 	left: 430px;
 	width: calc(100% - 470px);
 	font-size: 17px;
-	text-decoration: none; 
-
+	text-decoration: none;
 }
 .projcard:nth-child(2n) .projcard-textbox {
 	left: initial;
@@ -91,7 +89,6 @@
 	height: 140%;
 	width: 60px;
 	transform: rotate(8deg);
-	
 }
 .projcard:nth-child(2n) .projcard-textbox::before {
 	display: none;
@@ -108,13 +105,13 @@
 	position: relative;
 }
 .projcard-title {
-	font-family: 'Voces', 'Open Sans', arial, sans-serif;
+	font-family: "Voces", "Open Sans", arial, sans-serif;
 	font-size: 24px;
 	text-decoration: none;
 	color: inherit;
 }
 .projcard-subtitle {
-	font-family: 'Voces', 'Open Sans', arial, sans-serif;
+	font-family: "Voces", "Open Sans", arial, sans-serif;
 	color: #888;
 	text-decoration: none;
 	color: inherit;
@@ -133,9 +130,15 @@
 	background-color: #424242;
 	transition: width 0.2s ease;
 }
-.projcard-blue .projcard-bar { background-color: #0088FF; }
-.projcard-blue::before { background-image: linear-gradient(-70deg, #0088FF, transparent 50%); }
-.projcard-blue:nth-child(2n)::before { background-image: linear-gradient(-250deg, #0088FF, transparent 50%); }
+.projcard-blue .projcard-bar {
+	background-color: #0088ff;
+}
+.projcard-blue::before {
+	background-image: linear-gradient(-70deg, #0088ff, transparent 50%);
+}
+.projcard-blue:nth-child(2n)::before {
+	background-image: linear-gradient(-250deg, #0088ff, transparent 50%);
+}
 
 .projcard-description {
 	z-index: 10;
@@ -155,7 +158,7 @@
 }
 .projcard-tag {
 	display: inline-block;
-	background: #E0E0E0;
+	background: #e0e0e0;
 	color: #777;
 	border-radius: 3px 0 0 3px;
 	line-height: 26px;
@@ -168,7 +171,7 @@
 	top: -15px;
 }
 .projcard-tag::before {
-	content: '';
+	content: "";
 	position: absolute;
 	background: #fff;
 	border-radius: 10px;
@@ -179,29 +182,24 @@
 	top: 10px;
 }
 .projcard-tag::after {
-	content: '';
+	content: "";
 	position: absolute;
 	border-bottom: 13px solid transparent;
-	border-left: 10px solid #E0E0E0;
+	border-left: 10px solid #e0e0e0;
 	border-top: 13px solid transparent;
 	right: -10px;
 	top: 0;
 }
 .like-button {
-    display: flex;
-    align-items: left;
-    background: none;
-    border: none;
-    color: #555;
-    cursor: pointer;
-    padding: 5px;
-    margin-top: 15px;
-	z-index: 1;
-	
-	
+	background: none;
+	border: none;
+	color: #555;
+	cursor: pointer;
+    z-index: 1;
+	font-size: 15px; /* Set the font size for the icon */
+	margin-bottom: -10px;
 }
 
 .like-icon {
-    margin-right: 5px; 
+	margin-right: 5px;
 }
-

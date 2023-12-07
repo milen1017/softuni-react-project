@@ -3,13 +3,20 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import BASE_URL from "../../config";
 import "./EntryPage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import "@fortawesome/fontawesome-free/css/all.css";
+import { handleLikeClick } from "../../utils";
 
-export default function EntryPage() {
+export default function EntryPage({}) {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const [postInfo, setPostInfo] = useState([]);
 	const { userInfo } = useContext(UserContext);
 	const [canEditOrDelete, setCanEditOrDelete] = useState(false);
+	const [currentLikes, setCurrentLikes] = useState(postInfo.likes);
+	const [hasLiked, setHasLiked] = useState(false);
+
 	useEffect(() => {
 		const fetchPostInfo = async () => {
 			try {
@@ -55,6 +62,16 @@ export default function EntryPage() {
 		}
 	};
 
+	const onClickLike = () => {
+		handleLikeClick(
+		
+			postInfo._id,
+			currentLikes,
+			setCurrentLikes,
+			setHasLiked
+		);
+	};
+
 	return (
 		<>
 			<div className="entry-page-container">
@@ -63,8 +80,15 @@ export default function EntryPage() {
 				<img src={postInfo.cover} alt={postInfo.title} />
 				<div dangerouslySetInnerHTML={{ __html: postInfo.content }} />
 				<p>Likes: {postInfo.likes}</p>
+				{hasLiked && (
+						<div className="already-liked">You've already liked this post</div>
+					)}{" "}
 				<p>Posted by {postInfo.author?.username}</p>
 				<p>Created At: {postInfo.createdAt}</p>
+				<a className="like-button" onClick={onClickLike}>
+					<FontAwesomeIcon icon={faHeart} className="like-icon" />
+					Like
+				</a>
 
 				{canEditOrDelete && (
 					<div className="button-container">
