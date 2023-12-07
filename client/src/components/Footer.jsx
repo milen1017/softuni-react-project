@@ -2,7 +2,7 @@ const Footer = () => {
 	return (
 		<footer>
 			{/* Footer content goes here */}
-			<p>&copy; 2023 Your Company</p>
+			<p style={{textAlign: 'center'}}>&copy; 2023 Your Company</p>
 		</footer>
 	);
 };

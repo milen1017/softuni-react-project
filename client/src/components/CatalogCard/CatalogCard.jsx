@@ -63,7 +63,7 @@ const CatalogCard = ({
                 key={index}
                 className='projcard-tag'
                 onClick={() => {
-                  onTagClick(tag); // Call the callback function with the clicked tag
+                  onTagClick(tag);
                 }}
               >
                 {tag}
