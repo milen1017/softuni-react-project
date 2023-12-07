@@ -5,9 +5,9 @@
 	--gray-light: #cccccc;
 	--gray-lighter: #ececec;
 	--gray-lightest: #f1f1f1;
-}
-
-body {
+  }
+  
+  body {
 	color: var(--gray);
 	font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-style: normal;
@@ -17,7 +17,7 @@ body {
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
+  
 	background: url('https://www.hdwallpaperslife.com/wp-content/uploads/2017/11/cool_mountains_4k-HD.jpg');
 	background-attachment: fixed;
 	background-position: center;
@@ -25,40 +25,40 @@ body {
 	background-size: cover;
 	height: 100vh;
 	place-items: center;
-}
-
-img {
+  }
+  
+  img {
 	max-width: 100%;
-}
-
-main {
+  }
+  
+  main {
 	display: grid;
 	padding: 10px;
 	max-width: 1200px;
 	margin: 0 auto;
-}
-
-nav {
+  }
+  
+  nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
-}
-
-nav .auth-links {
+  }
+  
+  nav .auth-links {
 	display: flex;
 	gap: 15px;
-}
-nav .logout-link {
+  }
+  nav .logout-link {
 	cursor: pointer;
-}
-
-form.login,
-form.register {
+  }
+  
+  form.login,
+  form.register {
 	max-width: 400px;
 	margin: 0 auto;
-}
-input {
+  }
+  input {
 	display: flex;
 	margin-bottom: 5px;
 	width: 100%;
@@ -66,58 +66,79 @@ input {
 	border: 2px solid #ddd;
 	border-radius: 5px;
 	background-color: #fff;
-}
-
-button {
+  }
+  
+  button {
+	background-color: #e1ecf4;
+	border-radius: 3px;
+	border: 1px solid #7aa7c7;
+	box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+	box-sizing: border-box;
+	color: #39739d;
 	cursor: pointer;
-	width: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: rgba(0, 0, 0, 0.2);
-	border: 2px solid #0088ff; /* Add a solid border */
-	color: #fff;
-	border-radius: 5px;
-	padding: 10px 20px; /* Adjust padding as needed */
-	text-transform: uppercase;
-	font-weight: 600;
-	transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for color change */
-	justify-content: center;
+	display: inline-block;
+	font-family: -apple-system, system-ui, 'Segoe UI', 'Liberation Sans',
+	  sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 1.15385;
+	margin: 0;
+	outline: none;
+	padding: 8px 0.8em;
 	position: relative;
-}
-
-button:hover {
-	background-color: #0088ff; /* Change background on hover */
-	color: #fff; /* Change text color on hover */
-}
-footer {
+	text-align: center;
+	text-decoration: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	vertical-align: baseline;
+	white-space: nowrap;
+  }
+  
+  button:hover,
+  button:focus {
+	background-color: #b3d3ea;
+	color: #2c5777;
+  }
+  
+  button:focus {
+	box-shadow: 0 0 0 4px rgba(0, 149, 255, 0.15);
+  }
+  
+  button:active {
+	background-color: #a0c7e4;
+	box-shadow: none;
+	color: #2c5777;
+  }
+  
+  footer {
 	display: block;
-}
-
-.search-bar {
+  }
+  
+  .search-bar {
 	display: flex;
 	align-items: center;
-
+  
 	padding: 8px;
-}
-
-.search-icon {
+  }
+  
+  .search-icon {
 	margin-right: 5px;
-}
-a {
+  }
+  a {
 	text-decoration: none;
-
+  
 	color: inherit;
 	transition: text-shadow 0.3s ease;
-}
-a:hover {
+  }
+  a:hover {
 	color: #0088ff;
 	text-shadow: 0 0 3px #0088ff;
-}
-
-.quill-wrapper {
+  }
+  
+  .quill-wrapper {
 	background-color: #ffffff; /* Set your desired white background color */
-	padding: px; /* Adjust padding as needed */
 	border-radius: 8px; /* Add border radius if desired */
 	/* Any other styles */
-}
+  }
+  

@@ -105,7 +105,9 @@ function CreateEntry() {
 				onChange={(e) => setTitle(e.target.value)}
 				style={{ border: titleError ? '1px solid red' : '' }}
 			/>
-			{titleError && <p style={{ color: 'red' }}>Title is required</p>}
+			{titleError && (
+				<p style={{ color: 'red', marginTop: '5px' }}>Title is required</p>
+			)}
 
 			<input
 				type='text'
@@ -114,16 +116,23 @@ function CreateEntry() {
 				onChange={(e) => setSummary(e.target.value)}
 				style={{ border: summaryError ? '1px solid red' : '' }}
 			/>
-			{summaryError && <p style={{ color: 'red' }}>Summary is required</p>}
+			{summaryError && (
+				<p style={{ color: 'red', marginTop: '5px' }}>Summary is required</p>
+			)}
 			<div className='quill-wrapper'>
 				<ReactQuill
 					theme='snow'
 					value={content}
 					onChange={(value) => setContent(value)}
-					style={{ border: contentError ? '1px solid red' : '' }}
+					style={{
+						border: contentError ? '1px solid red' : '',
+						marginBottom: '5px',
+					}}
 				/>
-				{contentError && <p style={{ color: 'red' }}>Content is required</p>}
 			</div>
+			{contentError && (
+				<p style={{ color: 'red', marginTop: '5px' }}>Content is required</p>
+			)}
 			<input
 				type='text'
 				placeholder='Cover Image URL'
@@ -131,7 +140,9 @@ function CreateEntry() {
 				onChange={(e) => setCover(e.target.value)}
 				style={{ border: coverError ? '1px solid red' : '' }}
 			/>
-			{coverError && <p style={{ color: 'red' }}>Cover is required</p>}
+			{coverError && (
+				<p style={{ color: 'red', marginTop: '5px' }}>Cover is required</p>
+			)}
 			<input
 				type='text'
 				placeholder='Tags (comma-separated)'
@@ -139,7 +150,9 @@ function CreateEntry() {
 				onChange={handleTagsChange} // Use handleTagsChange to update the tags state
 				style={{ border: tagsError ? '1px solid red' : '' }}
 			/>
-			{tagsError && <p style={{ color: 'red' }}>Tags are required</p>}
+			{tagsError && (
+				<p style={{ color: 'red', marginTop: '5px' }}>Tags are required</p>
+			)}
 
 			<button type='submit'>Create Entry</button>
 		</form>

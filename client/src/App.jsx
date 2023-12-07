@@ -4,13 +4,15 @@ import Layout from './components/Layout';
 import { UserContextProvider } from './UserContext';
 import Home from './components/Home';
 import Login from './components/Login/Login';
-import Register from './components/Register';
+import Register from './components/Register/Register';
 import CreateEntry from './components/CreateEntry';
 import EntryPage from './components/EntryPage/EntryPage';
 import EditEntry from './components/EditEntry';
 import Catalog from './components/CatalogPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import NotFoundPage from './components/404/NotFoundPage';
+
+//TODO: Remove unused state variables
 
 function App() {
 	return (

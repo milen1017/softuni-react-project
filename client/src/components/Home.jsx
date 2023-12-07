@@ -6,7 +6,7 @@ import BASE_URL from '../config';
 
 const Home = () => {
 	const [entries, setEntries] = useState([]);
-	const { setUserInfo, userInfo } = useContext(UserContext);
+	const { userInfo } = useContext(UserContext);
 	useEffect(() => {
 		fetch(`${BASE_URL}/posts`).then((response) => {
 			response.json().then((entries) => {
@@ -19,7 +19,7 @@ const Home = () => {
 	const username = userInfo?.username;
 
 	return (
-		<div className='logo'>
+		<div className='logo' style={{ textAlign: 'center' }}>
 			<h1>Home</h1>
 			{entries.length > 0 &&
 				entries.map((entry) => <Entry key={entry._id} {...entry} />)}

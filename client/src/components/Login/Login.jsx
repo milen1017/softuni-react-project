@@ -8,7 +8,7 @@ const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [redirect, setRedirect] = useState(false);
-	const { setUserInfo } = useContext(UserContext);
+	const { updateUserInfo } = useContext(UserContext);
 	const [wrongCredentials, setWrongCredentials] = useState(false);
 
 	async function onLogin(e) {
@@ -19,9 +19,10 @@ const Login = () => {
 			headers: { 'Content-Type': 'application/json' },
 			credentials: 'include',
 		});
+
 		if (response.ok) {
 			response.json().then((userInfo) => {
-				setUserInfo(userInfo);
+				updateUserInfo(userInfo);
 				setRedirect(true);
 			});
 		} else {
@@ -55,8 +56,14 @@ const Login = () => {
 				}}
 			/>
 			{wrongCredentials && <p style={{ color: 'red' }}>Wrong credentials</p>}
-			<button type='submit'>Login</button>
-			<Link to='/register'> New Here? Sign Up Now to Create Your Account.</Link>
+			<button type='submit' className='login-btn'>
+				Login
+			</button>
+			<div>
+				<Link to='/register'>
+					New Here? Sign Up Now to Create Your Account.
+				</Link>
+			</div>
 		</form>
 	);
 };

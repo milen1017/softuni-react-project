@@ -1,4 +1,13 @@
 .entry-page-container {
 	background-color: #f0f0f0;
 	padding: 40px;
-}
+  }
+  
+  .button-container {
+	margin-top: 10px;
+  }
+  
+  .button-container > a {
+	margin-right: 10px;
+  }
+  

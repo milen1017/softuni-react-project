@@ -4,20 +4,20 @@ import { UserContext } from '../UserContext';
 import BASE_URL from '../config';
 
 const Navigation = () => {
-	const { setUserInfo, userInfo } = useContext(UserContext);
+	const { updateUserInfo, userInfo } = useContext(UserContext);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		fetch(`${BASE_URL}/auth/profile`, { credentials: 'include' })
-			.then((response) => response.json())
-			.then((userInfo) => {
-				setUserInfo(userInfo);
-			})
-			.catch((error) => {
-				// todo handle fetch errors here(fix not valid JSON)
-				console.error('Error fetching data:', error);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	fetch(`${BASE_URL}/auth/profile`, { credentials: "include" })
+	// 		.then((response) => response.json())
+	// 		.then((userInfo) => {
+	// 			setUserInfo(userInfo);
+	// 		})
+	// 		.catch((error) => {
+	// 			// todo handle fetch errors here(fix not valid JSON)
+	// 			console.error("Error fetching data:", error);
+	// 		});
+	// }, []);
 
 	function logout() {
 		try {
@@ -26,7 +26,7 @@ const Navigation = () => {
 				method: 'POST',
 			});
 
-			setUserInfo(null);
+			updateUserInfo(null);
 			navigate('/');
 		} catch (error) {
 			console.error('Logout error:', error);

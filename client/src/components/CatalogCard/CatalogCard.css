@@ -17,7 +17,6 @@
 	border: 2px solid #ddd;
 	font-size: 18px;
 	overflow: hidden;
-	cursor: pointer;
 	box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
 	transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
@@ -26,7 +25,7 @@
 	transform: translate(0px, -3px);
 }
 .projcard::before {
-	content: '';
+	content: "";
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -79,7 +78,7 @@
 }
 .projcard-textbox::before,
 .projcard-textbox::after {
-	content: '';
+	content: "";
 	position: absolute;
 	display: block;
 	background: #ff0000bb;
@@ -105,13 +104,13 @@
 	position: relative;
 }
 .projcard-title {
-	font-family: 'Voces', 'Open Sans', arial, sans-serif;
+	font-family: "Voces", "Open Sans", arial, sans-serif;
 	font-size: 24px;
 	text-decoration: none;
 	color: inherit;
 }
 .projcard-subtitle {
-	font-family: 'Voces', 'Open Sans', arial, sans-serif;
+	font-family: "Voces", "Open Sans", arial, sans-serif;
 	color: #888;
 	text-decoration: none;
 	color: inherit;
@@ -120,6 +119,9 @@
 .custom-link .projcard-subtitle {
 	text-decoration: none; /* Remove underlines */
 	color: #888; /* Update color */
+}
+.custom-link:hover {
+	text-shadow: none;
 }
 .projcard-bar {
 	left: -2px;
@@ -156,6 +158,9 @@
 	user-select: none;
 	pointer-events: none;
 }
+.projcard-tags {
+  margin-top: 10px;
+}
 .projcard-tag {
 	display: inline-block;
 	background: #e0e0e0;
@@ -168,10 +173,10 @@
 	cursor: default;
 	user-select: none;
 	transition: color 0.2s;
-	top: -15px;
+  cursor: pointer;
 }
 .projcard-tag::before {
-	content: '';
+	content: "";
 	position: absolute;
 	background: #fff;
 	border-radius: 10px;
@@ -182,7 +187,7 @@
 	top: 10px;
 }
 .projcard-tag::after {
-	content: '';
+	content: "";
 	position: absolute;
 	border-bottom: 13px solid transparent;
 	border-left: 10px solid #e0e0e0;
@@ -195,7 +200,7 @@
 	border: none;
 	color: #555;
 	cursor: pointer;
-	z-index: 1;
+    z-index: 1;
 	font-size: 15px; /* Set the font size for the icon */
 	margin-bottom: -10px;
 }
