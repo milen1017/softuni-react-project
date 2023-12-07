@@ -107,7 +107,7 @@ function EditEntry() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className='entry-form'>
 			<input
 				type='text'
 				placeholder='Title'
@@ -124,15 +124,17 @@ function EditEntry() {
 				style={{ border: summaryError ? '1px solid red' : '' }}
 			/>
 			{summaryError && <p style={{ color: 'red' }}>Summary is required</p>}
-			<div className='quill-wrapper'>
-				<ReactQuill
-					theme='snow'
-					value={content}
-					onChange={(value) => setContent(value)}
-					className='input-field'
-					style={{ border: contentError ? '1px solid red' : '' }}
-				/>
-			</div>
+			<ReactQuill
+				theme='snow'
+				value={content}
+				onChange={(value) => setContent(value)}
+				className='input-field'
+				style={{
+					border: contentError ? '1px solid red' : '',
+					marginBottom: '5px',
+					backgroundColor: 'white',
+				}}
+			/>
 			{contentError && <p style={{ color: 'red' }}>Content is required</p>}
 			<input
 				type='text'

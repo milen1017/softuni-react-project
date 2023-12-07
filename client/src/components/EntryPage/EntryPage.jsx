@@ -62,6 +62,7 @@ export default function EntryPage({}) {
 		}
 	};
 
+	//todo fix like logic
 	const onClickLike = () => {
 		handleLikeClick(postInfo._id, currentLikes, setCurrentLikes, setHasLiked);
 	};

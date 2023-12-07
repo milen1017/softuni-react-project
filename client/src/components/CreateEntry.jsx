@@ -12,7 +12,7 @@ function CreateEntry() {
 	const [cover, setCover] = useState('');
 	const [tags, setTags] = useState([]);
 
-	const [redirect, setRedirect] = useState(false);
+	// const [redirect, setRedirect] = useState(false);
 	const navigate = useNavigate();
 
 	// Error states for each input
@@ -63,8 +63,10 @@ function CreateEntry() {
 			});
 
 			if (response.ok) {
+				const data = await response.json();
 				console.log('Entry successfully created.');
-				setRedirect(true);
+				// setRedirect(true);
+				navigate(`/post/${data?._id}`);
 			} else {
 				console.error('Failed to create entry.');
 				// Handle error scenarios (e.g., display error message)
@@ -80,15 +82,15 @@ function CreateEntry() {
 		const tagsArray = tagsString.split(',').map((tag) => tag.trim());
 		setTags(tagsArray);
 	};
-	useEffect(() => {
-		if (redirect) {
-			navigate('/');
-			//todo navigate to post id
-		}
-	}, [redirect, navigate]);
+	// useEffect(() => {
+	// 	if (redirect) {
+	// 		navigate('/');
+	// 		//todo navigate to post id
+	// 	}
+	// }, [redirect, navigate]);
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit} className='entry-form'>
 			<input
 				type='text'
 				placeholder='Title'
@@ -110,17 +112,16 @@ function CreateEntry() {
 			{summaryError && (
 				<p style={{ color: 'red', marginTop: '5px' }}>Summary is required</p>
 			)}
-			<div className='quill-wrapper'>
-				<ReactQuill
-					theme='snow'
-					value={content}
-					onChange={(value) => setContent(value)}
-					style={{
-						border: contentError ? '1px solid red' : '',
-						marginBottom: '5px',
-					}}
-				/>
-			</div>
+			<ReactQuill
+				theme='snow'
+				value={content}
+				onChange={(value) => setContent(value)}
+				style={{
+					border: contentError ? '1px solid red' : '',
+					marginBottom: '5px',
+					backgroundColor: 'white',
+				}}
+			/>
 			{contentError && (
 				<p style={{ color: 'red', marginTop: '5px' }}>Content is required</p>
 			)}

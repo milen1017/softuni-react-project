@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { secretKey } = require('../config');
 
+//todo remove casing for username
+
 router.post('/register', async (req, res) => {
 	//todo create session redirect ro home
 	const { username, password } = req.body;
@@ -37,6 +39,7 @@ router.post('/login', async (req, res) => {
 				id: userData._id,
 				username,
 				avatar: userData.avatar,
+				likes: userData.likedPosts
 			});
 		} else {
 			res.status(400).json('Wrong credentials');
