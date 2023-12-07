@@ -1,7 +1,7 @@
-const crypto = require("crypto");
+const crypto = require('crypto');
 
-const secretKey = crypto.randomBytes(32).toString("base64");
+const secretKey = crypto.randomBytes(32).toString('base64');
 
 module.exports = {
-    secretKey
+	secretKey,
 };

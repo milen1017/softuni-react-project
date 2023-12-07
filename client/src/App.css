@@ -9,7 +9,7 @@
 
 body {
 	color: var(--gray);
-	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-style: normal;
 	font-weight: 400;
 	letter-spacing: 0;
@@ -18,7 +18,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	background: url("https://www.hdwallpaperslife.com/wp-content/uploads/2017/11/cool_mountains_4k-HD.jpg");
+	background: url('https://www.hdwallpaperslife.com/wp-content/uploads/2017/11/cool_mountains_4k-HD.jpg');
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;

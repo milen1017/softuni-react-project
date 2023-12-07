@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const EntrySchema = new Schema(
@@ -7,7 +7,7 @@ const EntrySchema = new Schema(
 		summary: String,
 		content: String,
 		cover: String,
-		author: { type: Schema.Types.ObjectId, ref: "User" },
+		author: { type: Schema.Types.ObjectId, ref: 'User' },
 		tags: [String],
 		likes: { type: Number, default: 0 },
 	},
@@ -16,6 +16,6 @@ const EntrySchema = new Schema(
 	}
 );
 
-const Entry = model("Entry", EntrySchema);
+const Entry = model('Entry', EntrySchema);
 
 module.exports = Entry;

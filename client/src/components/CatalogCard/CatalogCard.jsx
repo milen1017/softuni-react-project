@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "./CatalogCard.css";
-import { useState } from "react";
-import { handleLikeClick } from "../../utils";
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.css';
+import './CatalogCard.css';
+import { useState } from 'react';
+import { handleLikeClick } from '../../utils';
 
 const CatalogCard = ({
 	title,
@@ -26,34 +26,34 @@ const CatalogCard = ({
 	};
 
 	return (
-		<div className="projcard projcard-blue">
-			<div className="projcard-innerbox">
-				<Link to={`/post/${_id}`} className="custom-link">
-					<img className="projcard-img" src={cover} alt={title} />
+		<div className='projcard projcard-blue'>
+			<div className='projcard-innerbox'>
+				<Link to={`/post/${_id}`} className='custom-link'>
+					<img className='projcard-img' src={cover} alt={title} />
 				</Link>
-				<div className="projcard-textbox">
-					<Link to={`/post/${_id}`} className="custom-link">
-						<div className="projcard-title">{title}</div>
-						<div className="projcard-subtitle">
+				<div className='projcard-textbox'>
+					<Link to={`/post/${_id}`} className='custom-link'>
+						<div className='projcard-title'>{title}</div>
+						<div className='projcard-subtitle'>
 							Posted by {author?.username} at {formattedDate}
 						</div>
 					</Link>
-					<div className="likes-count">Likes: {currentLikes}</div>
+					<div className='likes-count'>Likes: {currentLikes}</div>
 					{hasLiked && (
-						<div className="already-liked">You've already liked this post</div>
-					)}{" "}
+						<div className='already-liked'>You've already liked this post</div>
+					)}{' '}
 					{/* Display message when already liked */}
-					<div className="projcard-bar" />
-					<div className="projcard-description">{summary}</div>
-					<a className="like-button" onClick={onClickLike}>
-						<FontAwesomeIcon icon={faHeart} className="like-icon" />
+					<div className='projcard-bar' />
+					<div className='projcard-description'>{summary}</div>
+					<a className='like-button' onClick={onClickLike}>
+						<FontAwesomeIcon icon={faHeart} className='like-icon' />
 						Like
 					</a>
 					<div>
 						{tags.map((tag, index) => (
 							<span
 								key={index}
-								className="projcard-tag"
+								className='projcard-tag'
 								onClick={() => {
 									onTagClick(tag); // Call the callback function with the clicked tag
 								}}
