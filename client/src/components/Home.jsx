@@ -17,6 +17,7 @@ const Home = () => {
 	}, []);
 
 	const username = userInfo?.username;
+	const linkStyle = { marginTop: '50px' };
 
 	return (
 		<div className='logo' style={{ textAlign: 'center' }}>
@@ -24,12 +25,12 @@ const Home = () => {
 			{entries.length > 0 &&
 				entries.map((entry) => <Entry key={entry._id} {...entry} />)}
 			{username && (
-				<h1>
+				<h1 style={linkStyle}>
 					<Link to='/catalog'>View All Posts</Link>
 				</h1>
 			)}
 			{!username && (
-				<h1>
+				<h1 style={linkStyle}>
 					<Link to='/login'>Login to view all posts</Link>
 				</h1>
 			)}

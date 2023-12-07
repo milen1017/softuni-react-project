@@ -7,7 +7,7 @@ const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {
 	const { day, month } = getDayAndMonth(createdAt);
 
 	return (
-		<div className='container mt-5'>
+		<div className='container mt-5' style={{marginTop: "50px"}}>
 			<div className='row'>
 				<div className='col-12'>
 					<article className='blog-card'>
