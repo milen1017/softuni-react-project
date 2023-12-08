@@ -43,7 +43,6 @@ const CatalogCard = ({
 						</div>
 					</Link>
 					<div className='likes-count'>Likes: {currentLikes}</div>
-					{/* Display message when already liked */}
 					<div className='projcard-bar' />
 					<div className='projcard-description'>{summary}</div>
 					<button

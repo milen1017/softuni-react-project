@@ -8,6 +8,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { handleLikeClick } from '../../utils';
 import Loader from '../Loader/Loader';
+import { getDayAndMonth } from '../../utils';
 
 export default function EntryPage({}) {
 	const navigate = useNavigate();
@@ -18,22 +19,22 @@ export default function EntryPage({}) {
 	const [currentLikes, setCurrentLikes] = useState(postInfo.likes);
 	const [hasLiked, setHasLiked] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
-
-
+	const formattedDate = new Date(postInfo.createdAt).toLocaleString();
+	
 	useEffect(() => {
 		const fetchPostInfo = async () => {
-			setIsLoading(true)
+			setIsLoading(true);
 			try {
 				const response = await fetch(`${BASE_URL}/posts/${id}`);
 				if (!response.ok) {
-					setIsLoading(false)
+					setIsLoading(false);
 					throw new Error('Failed to fetch post');
-					}
+				}
 				const entries = await response.json();
 				setPostInfo(entries);
-				setIsLoading(false)
+				setIsLoading(false);
 			} catch (error) {
-				setIsLoading(false)
+				setIsLoading(false);
 				console.error('Error fetching post:', error);
 			}
 		};
@@ -67,41 +68,41 @@ export default function EntryPage({}) {
 		}
 	};
 
-	
 	const onClickLike = () => {
 		handleLikeClick(postInfo._id, currentLikes, setCurrentLikes, setHasLiked);
 	};
 
 	return (
 		<>
-		{isLoading ? (
-			<Loader /> 
-		) : (
-			<div className='entry-page-container'>
-				<h1>{postInfo.title}</h1>
-				<p>Summary: {postInfo.summary}</p>
-				<img src={postInfo.cover} alt={postInfo.title} />
-				<div dangerouslySetInnerHTML={{ __html: postInfo.content }} />
-				<p>Likes: {postInfo.likes}</p>
-				{hasLiked && (
-					<div className='already-liked'>You've already liked this post</div>
-				)}{' '}
-				<p>Posted by {postInfo.author?.username}</p>
-				<p>Created At: {postInfo.createdAt}</p>
-				<a className='like-button' onClick={onClickLike}>
-					<FontAwesomeIcon icon={faHeart} className='like-icon' />
-					Like
-				</a>
-				{canEditOrDelete && (
-					<div className='button-container'>
-						<Link to={`/edit/${id}`}>
-							<button>Edit</button>
-						</Link>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<div className='entry-page-container'>
+					<h1>{postInfo.title}</h1>
+					<p>Summary: {postInfo.summary}</p>
+					<img src={postInfo.cover} alt={postInfo.title} />
+					<div dangerouslySetInnerHTML={{ __html: postInfo.content }} />
+					<p>Likes: {postInfo.likes}</p>
+					{hasLiked && (
+						<div className='already-liked'>You've already liked this post</div>
+					)}{' '}
+					<p>Posted by {postInfo.author?.username}</p>
+					<p>Created At: {formattedDate}</p>
+					<a className='like-button' onClick={onClickLike}>
+						<FontAwesomeIcon icon={faHeart} className='like-icon' />
+						Like
+					</a>
+					{canEditOrDelete && (
+						<div className='button-container'>
+							<Link to={`/edit/${id}`}>
+								<button>Edit</button>
+							</Link>
 
-						<button onClick={handleDelete}>Delete</button>
-					</div>
-				)}
-			</div>)}
+							<button onClick={handleDelete}>Delete</button>
+						</div>
+					)}
+				</div>
+			)}
 		</>
 	);
 }
