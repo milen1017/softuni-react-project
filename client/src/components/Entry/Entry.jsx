@@ -7,7 +7,7 @@ const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {
 	const { day, month } = getDayAndMonth(createdAt);
 
 	return (
-		<div className='container mt-5' style={{marginTop: "50px"}}>
+		<div className='container mt-5' style={{ marginTop: '50px' }}>
 			<div className='row'>
 				<div className='col-12'>
 					<article className='blog-card'>
@@ -35,9 +35,6 @@ const Entry = ({ title, summary, tags, cover, author, createdAt, _id }) => {
 								<span className='icon-link mr-3'>
 									<i className='fa fa-pencil-square-o'></i>post by{' '}
 									{author?.username}
-								</span>
-								<span className='icon-link'>
-									<i className='fa fa-comments-o'></i> 150
 								</span>
 							</p>
 							<p>{summary}</p>

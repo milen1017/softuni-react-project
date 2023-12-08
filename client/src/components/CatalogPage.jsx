@@ -7,6 +7,7 @@ import CatalogCard from './CatalogCard/CatalogCard';
 import BASE_URL from '../config';
 import '@fortawesome/fontawesome-free/css/all.css';
 import Loader from './Loader/Loader.jsx';
+import { debounce } from '../utils.js';
 
 const Catalog = ({ predefinedSearchTerm = '', showSearchBar = true }) => {
 	const [entries, setEntries] = useState([]);
@@ -14,35 +15,35 @@ const Catalog = ({ predefinedSearchTerm = '', showSearchBar = true }) => {
 	const [previousSearchTerm, setPreviousSearchTerm] = useState('');
 	const { userInfo } = useContext(UserContext);
 	const navigate = useNavigate();
-	const [isLoading, setIsLoading] = useState(false); // loading state
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			setIsLoading(true); // start loading
+			setIsLoading(true);
 			try {
 				const response = await fetch(
 					`${BASE_URL}/posts${searchTerm ? `?q=${searchTerm}` : ''}`
 				);
-				setIsLoading(false); //stop loading
+				setIsLoading(false);
 				if (response.ok) {
 					const data = await response.json();
 					setEntries(data);
 				} else {
-					setIsLoading(false); //stop loading
 					throw new Error('Failed to fetch data');
 				}
 			} catch (error) {
-				setIsLoading(false); //stop loading
+				setIsLoading(false);
 				console.error('Error fetching posts:', error);
 			}
 		};
+
 		fetchPosts();
 	}, [searchTerm, userInfo, navigate]);
 
-	const handleSearchInputChange = (event) => {
+	const handleSearchInputChange = debounce((event) => {
 		setSearchTerm(event.target.value);
-	};
-
+	}, 500); // Adjust the delay as needed 
+	
 	const handleTagClick = (tag) => {
 		if (previousSearchTerm === tag) {
 			setSearchTerm('');
@@ -61,13 +62,11 @@ const Catalog = ({ predefinedSearchTerm = '', showSearchBar = true }) => {
 					<input
 						type='text'
 						placeholder='Search posts...'
-						value={searchTerm}
 						onChange={handleSearchInputChange}
 					/>
 				</div>
 			)}
 			{entries.length > 0 ? (
-				//render loading
 				isLoading ? (
 					<Loader />
 				) : (
