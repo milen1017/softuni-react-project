@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { handleLikeClick } from '../../utils';
+import Loader from '../Loader/Loader';
 
 export default function EntryPage({}) {
 	const navigate = useNavigate();
@@ -16,19 +17,23 @@ export default function EntryPage({}) {
 	const [canEditOrDelete, setCanEditOrDelete] = useState(false);
 	const [currentLikes, setCurrentLikes] = useState(postInfo.likes);
 	const [hasLiked, setHasLiked] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+
 
 	useEffect(() => {
 		const fetchPostInfo = async () => {
+			setIsLoading(true)
 			try {
 				const response = await fetch(`${BASE_URL}/posts/${id}`);
 				if (!response.ok) {
+					setIsLoading(false)
 					throw new Error('Failed to fetch post');
-				}
+					}
 				const entries = await response.json();
 				setPostInfo(entries);
-				// console.log(userInfo.id);
-				// console.log(postInfo.author?._id);
+				setIsLoading(false)
 			} catch (error) {
+				setIsLoading(false)
 				console.error('Error fetching post:', error);
 			}
 		};
@@ -62,13 +67,16 @@ export default function EntryPage({}) {
 		}
 	};
 
-	//todo fix like logic
+	
 	const onClickLike = () => {
 		handleLikeClick(postInfo._id, currentLikes, setCurrentLikes, setHasLiked);
 	};
 
 	return (
 		<>
+		{isLoading ? (
+			<Loader /> 
+		) : (
 			<div className='entry-page-container'>
 				<h1>{postInfo.title}</h1>
 				<p>Summary: {postInfo.summary}</p>
@@ -93,7 +101,7 @@ export default function EntryPage({}) {
 						<button onClick={handleDelete}>Delete</button>
 					</div>
 				)}
-			</div>
+			</div>)}
 		</>
 	);
 }
