@@ -28,13 +28,13 @@ const ProfilePage = () => {
 				updateUserInfo({ ...userInfo, avatar: newAvatar });
 				setNewAvatar('');
 				setIsEditing(false);
-				setIsLoading(false)
+				setIsLoading(false);
 			} else {
-				setIsLoading(false)
+				setIsLoading(false);
 				console.error('Failed to change avatar');
 			}
 		} catch (error) {
-			setIsLoading(false)
+			setIsLoading(false);
 			console.error('Error changing avatar:', error);
 		}
 	};
@@ -49,39 +49,37 @@ const ProfilePage = () => {
 
 	return (
 		<div className='profile'>
-		{isLoading ? (
-		  <Loader />
-		) : (
-		  <div className='profile-header'>
-			<h2>User Profile</h2>
-			<div className='avatar-container' onClick={toggleEdit}>
-			  <img src={userInfo?.avatar} alt='User Avatar' />
-			  <p className='avatar-text'>Change Avatar</p>
-			</div>
-  
-			<p>Username: {userInfo?.username}</p>
-			{isEditing && (
-			  <div>
-				<input
-				  type='text'
-				  placeholder='New Avatar URL'
-				  value={newAvatar}
-				  onChange={(e) => setNewAvatar(e.target.value)}
-				/>
-				<button onClick={handleAvatarChange}>Change Avatar</button>
-			  </div>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<div className='profile-header'>
+					<h2>User Profile</h2>
+					<div className='avatar-container' onClick={toggleEdit}>
+						<img src={userInfo?.avatar} alt='User Avatar' />
+						<p className='avatar-text'>Change Avatar</p>
+					</div>
+
+					<p>Username: {userInfo?.username}</p>
+					{isEditing && (
+						<div>
+							<input
+								type='text'
+								placeholder='New Avatar URL'
+								value={newAvatar}
+								onChange={(e) => setNewAvatar(e.target.value)}
+							/>
+							<button onClick={handleAvatarChange}>Change Avatar</button>
+						</div>
+					)}
+				</div>
 			)}
-  
 			<a href='#' onClick={handleShowPostsClick}>
-			  Show my posts
+				Show my posts
 			</a>
-  
 			{showCatalog && (
-			  <Catalog predefinedSearchTerm={userInfo.id} showSearchBar={false} />
+				<Catalog predefinedSearchTerm={userInfo.id} showSearchBar={false} />
 			)}
-		  </div>
-		)}
-	  </div>
+		</div>
 	);
 };
 
