@@ -14,7 +14,7 @@ const postRoutes = require('./routes/postRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: 'http://localhost:5173'||"https://softuni-react-project-sigma.vercel.app" }));
+app.use(cors({ credentials: true, origin: ['http://localhost:5173',"https://softuni-react-project-sigma.vercel.app"] }));
 app.use(cookieParser());
 
 mongoose
