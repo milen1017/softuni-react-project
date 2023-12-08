@@ -7,6 +7,9 @@ const app = express();
 require('dotenv').config();
 const { DB_CONNECTION, PORT } = process.env;
 
+const port = process.env.PORT || 3001 
+// port var for render deploy
+
 const postRoutes = require('./routes/postRoutes');
 const authRoutes = require('./routes/authRoutes');
 
