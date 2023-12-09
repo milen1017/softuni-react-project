@@ -7,14 +7,23 @@ const app = express();
 require('dotenv').config();
 const { DB_CONNECTION, PORT } = process.env;
 
-const port = process.env.PORT || 3001 
+const port = process.env.PORT || 3001;
 // port var for render deploy
 
 const postRoutes = require('./routes/postRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: ['http://localhost:5173',"https://softuni-react-project-sigma.vercel.app"] }));
+app.use(
+	cors({
+		credentials: true,
+		origin: [
+			'http://localhost:5173',
+			'https://softuni-react-project-sigma.vercel.app',
+		],
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+	})
+);
 app.use(cookieParser());
 
 mongoose
